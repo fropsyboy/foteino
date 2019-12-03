@@ -8,6 +8,7 @@ use Validator;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Credential;
 
 class AuthController extends Controller
 {
@@ -28,6 +29,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|unique:users',
             'username' => 'required|string|unique:users',
             'password' => 'required|string',
+
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
@@ -53,43 +55,37 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
         $user->save();
+
+        $credential = new Credential([
+            'user_id' => $user->id,
+            'qualification' => $request->qualification,
+            'examing_body' => $request->examing_body,
+            'subjects' => serialize($request->subjects),
+            'o_level_passed' => $request->o_level_passed,
+            'skills' => $request->skills,
+            'training_courses' => $request->training_courses,
+            'degree' => serialize($request->degree),
+            'employment' => serialize($request->employment),
+            'hobbies' => $request->hobbies,
+            'career_path' => $request->career_path,
+            'change_career' => $request->change_career,
+            'change_reason' => $request->change_reason,
+            'guide' => $request->guide,
+        ]);
+        $credential->save();
         return response()->json([
-            'user' => $user
-        ], 201);
+            'message' => 'Successfully created User Details'
+        ]);
     }
 
-    public function credentials(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required'
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
-        }
 
-        $user = new User([
-            'name' => $request->first_name,
-            'm_name' => $request->middle_name,
-            'l_name' => $request->last_name,
-            'gender' => $request->gender,
-            'dob' => $request->dob,
-            'phone' => $request->phone,
-            'phone2' => $request->whatsapp,
-            'country' => $request->country,
-            'state' => $request->state,
-            'username' => $request->username,
-            'facebook' => $request->facebook,
-            'twitter' => $request->twitter,
-            'linkd' => $request->linkd,
-            'insta' => $request->insta,
-            'others' => $request->others,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
-        $user->save();
+    public function user_details($id)
+    {
+        $user= User::where('id',$id)->first();
+
         return response()->json([
             'user' => $user
-        ], 201);
+        ]);
     }
   
     /**
