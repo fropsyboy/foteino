@@ -20,7 +20,8 @@ use Illuminate\Http\Request;
 Route::group([ 'prefix' => 'v1'], function () {
 
     Route::post('login', 'API\AuthController@login');
-    Route::post('credentials', 'API\AuthController@credentials');
+
+    Route::get('user_details/{id}', 'API\AuthController@user_details');
 
     Route::post('signup', 'API\AuthController@signup');
   
