@@ -24,6 +24,9 @@ Route::group([ 'prefix' => 'v1'], function () {
     Route::get('user_details/{id}', 'API\AuthController@user_details');
 
     Route::post('signup', 'API\AuthController@signup');
+
+    Route::post('signupCompany', 'API\AuthController@signupCompany');
+
   
     Route::group(['middleware' => 'auth:api'], function() {
 

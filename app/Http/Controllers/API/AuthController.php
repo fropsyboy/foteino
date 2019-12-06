@@ -74,7 +74,7 @@ class AuthController extends Controller
         ]);
         $credential->save();
         return response()->json([
-            'message' => 'Successfully created User Details'
+            'message' => 'Successfully created User Account'
         ]);
     }
 
@@ -148,5 +148,51 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         return response()->json($request->user());
+    }
+
+    public function signupCompany(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            'country' => 'required',
+            'state' => 'required',
+            'staff_size' => 'required',
+            'sector' => 'required',
+            'industry' => 'required',
+            'years' => 'required',
+            'contact_person1' => 'required',
+            'contact_person2' => 'required',
+            'username' => 'required|string|unique:users',
+            'password' => 'required|string',
+            'description' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        $user = new User([
+            'name' => $request->company_name,
+            'type' => '1',
+            'phone' => $request->phone,
+            'country' => $request->country,
+            'state' => $request->state,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'staff_size' => $request->staff_size,
+            'sector' => $request->sector,
+            'industry' => $request->industry,
+            'years' => $request->years,
+            'contact_person1' => serialize($request->contact_person1),
+            'contact_person2' => serialize($request->contact_person2),
+            'description' => $request->description,
+            'cac_number' => $request->cac_number,
+        ]);
+        $user->save();
+        return response()->json([
+            'message' => 'Successfully created Company Account'
+        ]);
     }
 }
