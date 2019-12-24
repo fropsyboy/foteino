@@ -55,6 +55,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
         $user->save();
+        $user->attachRole(1);
 
         $credential = new Credential([
             'user_id' => $user->id,
@@ -147,7 +148,12 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        $user = auth()->user();
+        $roles = $user->roles->first();
+        $data = [
+            'user' => $user,
+        ];
+        return response()->json($data);
     }
 
     public function signupCompany(Request $request)
@@ -191,6 +197,7 @@ class AuthController extends Controller
             'cac_number' => $request->cac_number,
         ]);
         $user->save();
+        $user->attachRole(2);
         return response()->json([
             'message' => 'Successfully created Company Account'
         ]);
