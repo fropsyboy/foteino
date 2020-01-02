@@ -70,7 +70,14 @@
        
  
                 <li class="nav-item dropdown u-pro">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class=""> <span class="hidden-md-down">{{ Auth::user()->name }} &nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if(Auth::user()->gender == "Male")
+                    <img src="{{asset('assets/images/users/male.png')}}" alt="user-img" class="img-circle">
+                    @else
+                    <img src="{{asset('assets/images/users/female2.png')}}" alt="user-img" class="img-circle">
+                    @endif
+                    
+                    <span class="hidden-md-down">{{ Auth::user()->name }} &nbsp;<i class="fa fa-angle-down"></i></span> </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                        
                         <a href="{{route('profile')}}" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>

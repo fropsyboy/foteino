@@ -23,6 +23,8 @@
     <link href="{{url('assets/node_modules/chartist-js/dist/chartist.min.css')}}" rel="stylesheet">
     <link href="{{url('assets/node_modules/chartist-js/dist/chartist-init.css')}}" rel="stylesheet">
     <link href="{{url('assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css')}}" rel="stylesheet">
+    <link href="{{url('assets/node_modules/Magnific-Popup-master/dist/magnific-popup.css')}}" rel="stylesheet">
+    <link href="{{url('assets/dist/css/pages/user-card.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css"
         href="{{url('assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css')}}">
@@ -145,9 +147,9 @@
     <!-- <script src="{{url('assets/node_modules/Chart.js/chartjs.init.js')}}"></script> -->
     <!-- <script src="{{url('assets/node_modules/Chart.js/Chart.min.js')}}"></script> -->
     <script src="{{url('assets/dist/js/dashboard1.js')}}"></script>
-    <script src="{{url('assets/node_modules/toast-master/js/jquery.toast.js')}}"></script>
-    <script src="{{url('assets/node_modules/chartist-js/dist/chartist.min.js')}}"></script>
-    <script src="{{url('assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}"></script>
+    <!-- <script src="{{url('assets/node_modules/toast-master/js/jquery.toast.js')}}"></script> -->
+    <!-- <script src="{{url('assets/node_modules/chartist-js/dist/chartist.min.js')}}"></script> -->
+    <!-- <script src="{{url('assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}"></script> -->
     <script src="{{url('assets/node_modules/chartist-js/dist/chartist-init.js')}}"></script>
     <!-- This is data table -->
     <script src="{{url('assets/node_modules/datatables.net/js/jquery.dataTables.min.js')}}"></script>

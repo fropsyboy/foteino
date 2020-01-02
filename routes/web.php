@@ -19,8 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::get('/profile', 'HomeController@profile')->name('profile');\
+Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::get('/profiles/{id?}', 'HomeController@profiles')->name('profiles');
 Route::get('/empty', 'HomeController@profile')->name('empty');
+Route::get('/applicants', 'HomeController@applicants')->name('applicants');
+Route::get('/companies', 'HomeController@companies')->name('companies');
+Route::get('/jobs', 'HomeController@jobs')->name('jobs');
+
 
 
 
