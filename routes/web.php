@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
+
+Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -33,6 +31,12 @@ Route::get('/companies', 'HomeController@companies')->name('companies');
 
 Route::get('/jobs', 'HomeController@jobs')->name('jobs');
 
+Route::post('/jobs', 'HomeController@addJob')->name('addJob');
 
+Route::get('/jobs/{id}/{status}', 'HomeController@job_status')->name('job_status');
 
+Route::get('/jobProfile/{id}/{company}', 'HomeController@job_profile')->name('job_profile');
 
+Route::get('/application/{id}', 'HomeController@application')->name('application');
+
+Route::get('/applications', 'HomeController@applications')->name('applications');
