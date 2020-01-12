@@ -31,7 +31,7 @@
                 <li class="nav-small-cap">--- PERSONAL</li>
                 <li> <a class="waves-effect waves-dark" href="{{route('dashboard')}}" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a>
                 <li> <a class="waves-effect waves-dark" href="{{route('jobs')}}" aria-expanded="false"><i class="ti-layout-grid2"></i><span class="hide-menu">Jobs</span></a>
-                <li> <a class="waves-effect waves-dark" href="{{route('empty')}}" aria-expanded="false"><i class="ti-email"></i><span class="hide-menu">Applications</span></a>
+                <li> <a class="waves-effect waves-dark" href="{{route('applications')}}" aria-expanded="false"><i class="ti-email"></i><span class="hide-menu">Applications</span></a>
                 </li>
 
                 <li class="nav-small-cap">--- System Users</li>
@@ -39,10 +39,11 @@
                     </li>
                     <li> <a class="waves-effect waves-dark" href="{{route('companies')}}" aria-expanded="false"><i class="ti-layout-accordion-merged"></i><span class="hide-menu">Companies</span></a>
                     </li>
+                    <li> <a class="waves-effect waves-dark" href="{{route('companies')}}" aria-expanded="false"><i class="far fa-circle text-danger"></i><span class="hide-menu">Admins</span></a>
+                    </li>
 
 
                     <li class="nav-small-cap">--- SUPPORT</li>
-                    <li> <a class="waves-effect waves-dark" href="{{route('empty')}}" aria-expanded="false"><i class="far fa-circle text-danger"></i><span class="hide-menu">Assignments</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="{{route('empty')}}" aria-expanded="false"><i class="far fa-circle text-success"></i><span class="hide-menu">Tickets</span></a></li>
                 </li>
             </ul>

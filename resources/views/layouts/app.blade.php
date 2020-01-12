@@ -25,6 +25,8 @@
     <link href="{{url('assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css')}}" rel="stylesheet">
     <link href="{{url('assets/node_modules/Magnific-Popup-master/dist/magnific-popup.css')}}" rel="stylesheet">
     <link href="{{url('assets/dist/css/pages/user-card.css')}}" rel="stylesheet">
+    <link href="{{url('assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{url('assets/node_modules/html5-editor/bootstrap-wysihtml5.css')}}" />
 
     <link rel="stylesheet" type="text/css"
         href="{{url('assets/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css')}}">
@@ -40,6 +42,7 @@
 </head>
 
 <body class="skin-blue fixed-layout">
+@include('sweetalert::alert')
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -144,12 +147,12 @@
     <!-- Popup message jquery -->
     <!-- <script src="{{url('assets/node_modules/toast-master/js/jquery.toast.js')}}"></script> -->
     <!-- Chart JS -->
-    <!-- <script src="{{url('assets/node_modules/Chart.js/chartjs.init.js')}}"></script> -->
-    <!-- <script src="{{url('assets/node_modules/Chart.js/Chart.min.js')}}"></script> -->
+    <script src="{{url('assets/node_modules/Chart.js/chartjs.init.js')}}"></script>
+    <script src="{{url('assets/node_modules/Chart.js/Chart.min.js')}}"></script>
     <script src="{{url('assets/dist/js/dashboard1.js')}}"></script>
     <!-- <script src="{{url('assets/node_modules/toast-master/js/jquery.toast.js')}}"></script> -->
-    <!-- <script src="{{url('assets/node_modules/chartist-js/dist/chartist.min.js')}}"></script> -->
-    <!-- <script src="{{url('assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}"></script> -->
+    <script src="{{url('assets/node_modules/chartist-js/dist/chartist.min.js')}}"></script>
+    <script src="{{url('assets/node_modules/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js')}}"></script>
     <script src="{{url('assets/node_modules/chartist-js/dist/chartist-init.js')}}"></script>
     <!-- This is data table -->
     <script src="{{url('assets/node_modules/datatables.net/js/jquery.dataTables.min.js')}}"></script>
@@ -166,6 +169,11 @@
     <script src="{{url('assets/node_modules/peity/jquery.peity.min.js')}}"></script>
     <script src="{{url('/assets/node_modules/peity/jquery.peity.init.js')}}"></script>
     <!-- end - This is for export functionality only -->
+    <script src="{{url('assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
+    <script type="text/javascript">
+        // Date Picker
+        jQuery('.mydatepicker').datepicker();
+    </script>
     <script>
         $(function () {
             $('#myTable').DataTable();
@@ -215,6 +223,17 @@
             });
             $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
         });
+    </script>
+
+<script src="{{url('assets/node_modules/html5-editor/wysihtml5-0.3.0.js')}}"></script>
+    <script src="{{url('assets/node_modules/html5-editor/bootstrap-wysihtml5.js')}}"></script>
+    <script>
+    $(document).ready(function() {
+
+        $('.textarea_editor').wysihtml5();
+
+
+    });
     </script>
 </body>
 </html>
