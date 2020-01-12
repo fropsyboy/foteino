@@ -85,48 +85,48 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="recipient-name" class="control-label">Title:</label>
-                            <input type="text" name="title" class="form-control" id="recipient-name" placeholder="Native Android Developer">
+                            <input type="text" name="title" class="form-control" id="recipient-name" placeholder="Native Android Developer" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="message-text" class="control-label">Location:</label>
-                            <input type="text" class="form-control" name="location" id="recipient-name" placeholder="Lagos, Nigeria">
+                            <input type="text" class="form-control" name="location" id="recipient-name" placeholder="Lagos, Nigeria" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label for="recipient-name" class="control-label">Job Type:</label>
-                            <input type="text" class="form-control" name="type" id="recipient-name" placeholder="Full Time">
+                            <input type="text" class="form-control" name="type" id="recipient-name" placeholder="Full Time" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="message-text" class="control-label">Experience:</label>
-                            <input type="text" class="form-control" name="experience" id="recipient-name" placeholder="3+ years">
+                            <input type="text" class="form-control" name="experience" id="recipient-name" placeholder="3+ years" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="message-text" class="control-label">Salary:</label>
-                            <input type="text" class="form-control" name="salary" id="recipient-name" placeholder="$6k – $10k • No equity">
+                            <input type="text" class="form-control" name="salary" id="recipient-name" placeholder="$6k – $10k • No equity" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label for="recipient-name" class="control-label">No. Needed:</label>
-                            <input type="text" class="form-control " name="needed" id="recipient-name" placeholder="3 Personel">
+                            <input type="text" class="form-control " name="needed" id="recipient-name" placeholder="3 Personel" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="message-text" class="control-label">Start Date:</label>
-                            <input type="text" class="form-control text-muted mydatepicker" name="start" id="bdate" placeholder="YYYY/MM/DD">
+                            <input type="text" class="form-control text-muted mydatepicker" name="start" id="bdate" placeholder="YYYY/MM/DD" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="message-text" class="control-label">End Date:</label>
-                            <input type="text" class="form-control mydatepicker" name="end" id="recipient-name" placeholder="YYYY/MM/DD">
+                            <input type="text" class="form-control mydatepicker" name="end" id="recipient-name" placeholder="YYYY/MM/DD" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label for="recipient-name" class="control-label" >Job Description:</label>
-                            <textarea class="textarea_editor form-control" rows="15" id="recipient-name" name="description" ></textarea>
+                            <textarea class="textarea_editor form-control" rows="15" id="recipient-name" name="description" required></textarea>
                         </div>
                         
                     </div>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger waves-effect waves-light">Save changes</button>
+                    <button type="submit" class="btn btn-danger waves-effect waves-light">Post Job</button>
                 </div>
                 </form>
             </div>
