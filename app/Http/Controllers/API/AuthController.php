@@ -25,10 +25,13 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string',
+            'type' => 'required',
+            'full_name' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'username' => 'required|string|unique:users',
+            'phone' => 'required',
             'password' => 'required|string',
+            'cpassword' => 'required|same:password'
 
         ]);
         if ($validator->fails()) {
@@ -36,21 +39,11 @@ class AuthController extends Controller
         }
 
         $user = new User([
-            'name' => $request->first_name,
-            'm_name' => $request->middle_name,
-            'l_name' => $request->last_name,
-            'gender' => $request->gender,
-            'dob' => $request->dob,
+            'type' => $request->type,
+            'name' => $request->full_name,
             'phone' => $request->phone,
-            'phone2' => $request->whatsapp,
-            'country' => $request->country,
-            'state' => $request->state,
+            'phone2' => $request->phone2,
             'username' => $request->username,
-            'facebook' => $request->facebook,
-            'twitter' => $request->twitter,
-            'linkd' => $request->linkd,
-            'insta' => $request->insta,
-            'others' => $request->others,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
@@ -59,19 +52,6 @@ class AuthController extends Controller
 
         $credential = new Credential([
             'user_id' => $user->id,
-            'qualification' => $request->qualification,
-            'examing_body' => $request->examing_body,
-            'subjects' => serialize($request->subjects),
-            'o_level_passed' => $request->o_level_passed,
-            'skills' => $request->skills,
-            'training_courses' => $request->training_courses,
-            'degree' => serialize($request->degree),
-            'employment' => serialize($request->employment),
-            'hobbies' => $request->hobbies,
-            'career_path' => $request->career_path,
-            'change_career' => $request->change_career,
-            'change_reason' => $request->change_reason,
-            'guide' => $request->guide,
         ]);
         $credential->save();
         return response()->json([
@@ -121,6 +101,7 @@ class AuthController extends Controller
         $token->save();
         return response()->json([
             'access_token' => $tokenResult->accessToken,
+            'access' => $user->type,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(
                 $tokenResult->token->expires_at
@@ -149,9 +130,37 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = auth()->user();
-        $roles = $user->roles->first();
+
+        $credentials = Credential::where('user_id', $user->id)->first();
+
         $data = [
-            'user' => $user,
+            'name' => $user->name,
+            'gender' => $user->gender,
+            'dob' => $user->dob,
+            'phone' => $user->phone,
+            'phone2' => $user->name,
+            'country' => $user->phone2,
+            'state' => $user->dob,
+            'username' => $user->username,
+            'facebook' => $user->facebook,
+            'twitter' => $user->twitter,
+            'linkd' => $user->linkd,
+            'insta' => $user->insta,
+            'email' => $user->email,
+            'staff_size' => $user->staff_size,
+            'sector' => $user->sector,
+            'industry' => $user->industry,
+            'years' => $user->years,
+            'qualification' => $credentials->qualification,
+            'examing_body' => $user->examing_body,
+            'subjects' => unserialize($user->subjects),
+            'o_level_passed' => $user->o_level_passed,
+            'skills' => $user->skills,
+            'training_courses' => $user->training_courses,
+            'career_path' => $credentials->career_path,
+            'degree' => unserialize($user->degree),
+            'employment' => unserialize($user->employment),
+            
         ];
         return response()->json($data);
     }

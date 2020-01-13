@@ -39,7 +39,7 @@
                     </li>
                     <li> <a class="waves-effect waves-dark" href="{{route('companies')}}" aria-expanded="false"><i class="ti-layout-accordion-merged"></i><span class="hide-menu">Companies</span></a>
                     </li>
-                    <li> <a class="waves-effect waves-dark" href="{{route('companies')}}" aria-expanded="false"><i class="far fa-circle text-danger"></i><span class="hide-menu">Admins</span></a>
+                    <li> <a class="waves-effect waves-dark" href="{{route('admins')}}" aria-expanded="false"><i class="far fa-circle text-danger"></i><span class="hide-menu">Admins</span></a>
                     </li>
 
 
