@@ -40,3 +40,7 @@ Route::get('/jobProfile/{id}/{company}', 'HomeController@job_profile')->name('jo
 Route::get('/application/{id}', 'HomeController@application')->name('application');
 
 Route::get('/applications', 'HomeController@applications')->name('applications');
+
+Route::get('/admins', 'HomeController@admins')->name('admins');
+
+Route::post('/admins', 'HomeController@addAdmin')->name('addAdmin');

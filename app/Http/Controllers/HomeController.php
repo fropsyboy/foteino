@@ -7,6 +7,7 @@ use App\User;
 use Validator;
 Use Alert;
 use App\Job;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -189,5 +190,47 @@ class HomeController extends Controller
             'applicant' => $applicant
         ];
         return view('user.applications',$data);
+    }
+
+    public function admins()
+    {
+        
+        $admins = User::select('id', 'name','username', 'email', 'phone', 'created_at')->where('type',2)->get();
+
+
+        $data = [
+            'admins' => $admins
+        ];
+        return view('user.admin',$data);
+    }
+
+    public function addAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users',
+            'phone' => 'required',
+            'username' => 'required|string|unique:users',
+            'password' => 'required',
+            'cpassword' => 'required|same:password'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        $admin = new User([
+            'type' => 2,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'username' => $request->username,
+            'password' => bcrypt($request->password)
+        ]);
+        $admin->save();
+        $admin->attachRole(5);
+
+        Alert::success('Success', 'Admin Successfully Added');
+        
+        return back();
     }
 }
