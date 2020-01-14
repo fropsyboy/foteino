@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+Route::post('/adminLogin', 'Auth\LoginController@adminLogin')->name('adminLogin');
+
+
 Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -19,14 +19,22 @@
    <body>
       <div class="mid-class">
          <div class="art-right-w3ls">
+         
             <h2>Sign In to 
                  <a href="https://foteinotalento.com" style="color: #205e7e">
-                    <font size="22"> <b> Foteino Talento </b></font>
+                     <b> Foteino Talento </b>
                 </a>
             </h2>
-            <form action="{{ route('login') }}" method="post">
+            <form action="{{ route('adminLogin') }}" method="post">
                             @csrf
                <div class="main">
+               @if(session()->get('error'))
+                     <div class="alert alert-danger " >
+                     <font color="red">
+                        {{ session()->get('error') }}
+                        </font>
+                     </div>
+               @endif
                   <div class="form-left-to-w3l">
                      <input type="text" name="email" placeholder="email" required autocomplete="email" autofocus>
                      @error('email')

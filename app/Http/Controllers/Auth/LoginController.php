@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Redirect;
+use Session;
+use Validator;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -37,6 +42,35 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function adminLogin(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            \Session::flash('error', $validator->errors());
+            return back();
+        }
+
+        $check = User::where('type', '!=', 0)->where('email', $request->email)->first();
+
+        
+
+        if (Hash::check($request->password, $check->password)) {
+
+            Auth::login($check);
+            
+            return redirect()->route('dashboard');
+        }else{
+            \Session::flash('error', 'Incorrect credentials. Please try again');
+            return back();
+        }
+
+
     }
 
     public function logout(Request $request)
