@@ -272,7 +272,7 @@ class AuthController extends Controller
     public function job($id)
     {
         try {
-            $job = Job::where('id',$id)->first();
+            $job = Job::with('cleanCompany')->where('id',$id)->first();
 
             $data = [
                 'job' => $job,
