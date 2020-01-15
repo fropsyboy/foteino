@@ -30,11 +30,12 @@
                        <tbody>
                        <?php $i = 1; ?>
                         @foreach($applicant as $item)
+                        @if($item->user_id == Auth::user()->id)
                             <tr>
                             <td>{{$i}}</td>
-                            <!-- <td>
+                            <td>
                                 <a href="{{route('job_profile',['id' => $item->id, 'company' => $item->company])}}" >
-                                    {{$item->title}}
+                                    {{$item->user->name}}
                                 </a>
                             </td>
                             <td>{{$item->needed}}</td>
@@ -49,7 +50,8 @@
                                     <span class="btn btn-danger btn-sm">{{$item->status}}</span>
                                     @endif
                                 </a>
-                            </td> -->
+                            </td>
+                            @endif
                             </tr>
                         <?php $i++; ?>
                         @endforeach

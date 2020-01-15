@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Credential;
 use App\Job;
+use App\Application;
 
 class AuthController extends Controller
 {
@@ -49,6 +50,12 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
         $user->save();
+
+        if($request->type == 0){
+            $user->attachRole(1);
+        }else{
+            $user->attachRole(2);
+        }
         $user->attachRole(1);
 
         $credential = new Credential([
@@ -281,7 +288,61 @@ class AuthController extends Controller
             return response()->json(['jobs' => $job], 200);
 
         }catch (\Exception $e) {
-            return response()->json(['error' => $e], 401);
+            return response()->json(['error' => $e->getMessage()], 401);
         }
     }
+
+    public function applyJob(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'job_id' => 'required',
+            
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        try {
+
+            $check = Application::where('job_id', $request->job_id)->where('user_id',$user->id)->count();
+
+            if($check >= 1){
+                return response()->json(['error' => 'You have applied for this Job Already'], 401);
+            }
+
+            $user = auth()->user();
+            
+            $job = new Application([
+                'user_id' => $user->id,
+                'job_id' => $request->job_id,
+                'note' => $request->note,
+            ]);
+            $job->save();
+
+
+            return response()->json(['jobs' => 'Your Job Application was successful'], 200);
+
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+    }
+
+    public function applications()
+    {
+        try {
+            $job = Application::with('user', 'job')->orderby('id','desc')->paginate(10);
+
+            $data = [
+                'job' => $job,
+            ];
+
+            return response()->json(['jobs' => $job], 200);
+
+        }catch (\Exception $e) {
+            $message =  $e->getMessage();
+             Alert::error('Error', $message);
+        }
+    }
+
+    
 }

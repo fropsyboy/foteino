@@ -31,11 +31,18 @@ Route::group([ 'prefix' => 'v1'], function () {
     Route::group(['middleware' => 'auth:api'], function() {
 
         Route::get('logout', 'API\AuthController@logout');
+
         Route::get('user', 'API\AuthController@user');
+
         Route::post('updateProfile', 'API\AuthController@updateProfile');
+
         Route::get('jobs', 'API\AuthController@jobs');
+
         Route::get('job/{id}', 'API\AuthController@job');
 
+        Route::post('applyJob', 'API\AuthController@applyJob');
+
+        
 
     });
 });
