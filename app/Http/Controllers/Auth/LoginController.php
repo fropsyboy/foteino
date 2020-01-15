@@ -58,7 +58,7 @@ class LoginController extends Controller
 
         $check = User::where('type', '!=', 0)->where('email', $request->email)->first();
 
-        
+        if($check){
 
         if (Hash::check($request->password, $check->password)) {
 
@@ -69,6 +69,11 @@ class LoginController extends Controller
             \Session::flash('error', 'Incorrect credentials. Please try again');
             return back();
         }
+
+    }else{
+        \Session::flash('error', 'Incorrect credentials. Please try again');
+        return back();
+    }
 
 
     }
