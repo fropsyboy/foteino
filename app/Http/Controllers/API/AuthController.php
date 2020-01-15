@@ -128,7 +128,7 @@ class AuthController extends Controller
      *
      * @return [json] user object
      */
-    public function user(Request $request)
+    public function user()
     {
         $user = auth()->user();
 
@@ -139,9 +139,9 @@ class AuthController extends Controller
             'gender' => $user->gender,
             'dob' => $user->dob,
             'phone' => $user->phone,
-            'phone2' => $user->name,
-            'country' => $user->phone2,
-            'state' => $user->dob,
+            'phone2' => $user->phone2,
+            'country' => $user->country,
+            'state' => $user->state,
             'username' => $user->username,
             'facebook' => $user->facebook,
             'twitter' => $user->twitter,
