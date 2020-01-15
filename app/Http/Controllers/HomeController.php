@@ -30,7 +30,57 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $user = auth()->user();
+        
+        if($user->type == 1){
+            
+
+            $applications = Job::with('cleanCompany')->where('user_id', $user->id)->orderby('id','desc')->paginate(10);
+            $applicationsCount = Job::where('user_id', $user->id)->orderby('id','desc')->count();
+
+            $applicants = Job::where('user_id', $user->id)->orderby('id','desc')->paginate(10);
+            $applicantsCount = Job::where('user_id', $user->id)->orderby('id','desc')->count();
+
+            $applicantsApproved = Job::where('user_id', $user->id)->orderby('id','desc')->paginate(10);
+            $applicantsPending = Job::where('user_id', $user->id)->orderby('id','desc')->count();
+
+            $data = [
+                'applications' => $applications,
+                'applicationsCount' => $applicationsCount,
+                'applicants' => $applicants,
+                'applicantsCount' => $applicantsCount,
+                'user' => $user,
+                'companies' => $companies,
+            ];
+
+
+            return view('dashboard2', $data);
+        }else{
+
+            $applications = Job::orderby('id','desc')->paginate(10);
+            $applicationsCount = Job::count();
+
+            $applicants = Job::orderby('id','desc')->paginate(10);
+            $applicantsCount = Job::count();
+
+            $user = User::where('type', 0 )->orderby('id','desc')->count();
+
+            $companies = User::where('type', 1 )->orderby('id','desc')->count();
+
+            $data = [
+                'applications' => $applications,
+                'applicationsCount' => $applicationsCount,
+                'applicants' => $applicants,
+                'applicantsCount' => $applicantsCount,
+                'user' => $user,
+                'companies' => $companies,
+            ];
+
+
+            return view('dashboard', $data);
+
+        }
+        
     }
 
 
@@ -43,6 +93,7 @@ class HomeController extends Controller
     public function profiles($id)
     {
         $profileData = $this->getProfileData($id);
+
 
         $data = [
             'profile' => $profileData,
@@ -93,6 +144,19 @@ class HomeController extends Controller
         ];
 
         return view('user.jobs',$data);
+    }
+
+    public function jobsC()
+    {
+        $user = auth()->user();
+
+        $jobs = Job::with('company')->where('user_id', $user->id)->orderby('id','desc')->paginate(10);
+
+        $data = [
+            'jobs' => $jobs,
+        ];
+
+        return view('user.jobsC',$data);
     }
 
     public function addJob(Request $request)

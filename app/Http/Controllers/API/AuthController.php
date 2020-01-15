@@ -49,6 +49,12 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
         $user->save();
+
+        if($request->type == 0){
+            $user->attachRole(1);
+        }else{
+            $user->attachRole(2);
+        }
         $user->attachRole(1);
 
         $credential = new Credential([

@@ -120,9 +120,40 @@
                                          <p> <strong>Degree</strong> </p>
                                          <div class="col-md-12 col-xs-6 b-r">
                                          <strong>
-                                         @foreach(unserialize($profile->credentials->degree) as $attached)
-                                            {{ $attached}},
-                                        @endforeach
+                                         
+                                        <div class="table-responsive m-t-40">
+                                                <table id="config-table" class="table display table-bordered table-striped no-wrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Degree</th>
+                                                            <th>Faculty</th>
+                                                            <th>Department</th>
+                                                            <th>University</th>
+                                                            <th>Admission Year</th>
+                                                            <th>Graduation Year</th>
+                                                            <th>Honour</th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                <tbody>
+                                                @foreach(unserialize($profile->credentials->degree) as $attached)
+                                                        <tr>
+                                                    
+                                                        <td>{{$attached['degree']}}</td>
+                                                        <td>{{$attached['faculty']}}</td>
+                                                        <td>{{$attached['department']}}</td>
+                                                        <td>{{$attached['university']}}</td>
+                                                        <td>{{$attached['year_of_admission']}}</td>
+                                                        <td>{{$attached['year_of_graduation']}}</td>
+                                                        <td>{{$attached['honour']}}</td>
+                                                    
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                </table>
+                                            </div>
+
+
                                                 </strong> 
                                                 <br>
                                             </div>
@@ -130,27 +161,56 @@
 
                                     <hr>
                                     <div class="row">
-                                         <p> <strong>Employment History </strong> </p>
+                                         <p> <strong>Employment History</strong> </p>
                                          <div class="col-md-12 col-xs-6 b-r">
                                          <strong>
                                          
+                                        <div class="table-responsive m-t-40">
+                                                <table id="config-table" class="table display table-bordered table-striped no-wrap">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Role</th>
+                                                            <th>Start Year</th>
+                                                            <th>End Year</th>
+                                                            <th>Post Held</th>
+                                                            
+                                                        
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                <tbody>
+                                                @foreach(unserialize($profile->credentials->employment) as $attached)
+                                                        <tr>
+                                                    
+                                                        <td>{{$attached['name']}}</td>
+                                                        <td>{{$attached['role']}}</td>
+                                                        <td>{{$attached['start_year']}}</td>
+                                                        <td>{{$attached['end_year']}}</td>
+                                                        <td>{{$attached['post_held']}}</td>
+                                                        
+                                                    
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                </table>
+                                            </div>
+
+
                                                 </strong> 
                                                 <br>
-                                                <!-- <p class="text-muted"> {{$profile->credentials?$profile->credentials->skills:'N/A'}}</p> -->
                                             </div>
                                     </div>
 
                                     <hr>
                                     <div class="row">
-                                         <p> <strong>O Level Subjects ({{$profile->credentials?$profile->credentials->o_level_passed:'N/A'}}) </strong> </p>
                                          <div class="col-md-12 col-xs-6 b-r">
                                          <strong>
-                                         @foreach(unserialize($profile->credentials->subjects) as $attached)
-                                            {{ $attached}},
+                                         @foreach(unserialize($profile->credentials->subjects) as $attached2)
+                                            {{$attached2}},
                                         @endforeach
                                                 </strong> 
                                                 <br>
-                                                <!-- <p class="text-muted"> {{$profile->credentials?$profile->credentials->skills:'N/A'}}</p> -->
                                             </div>
                                     </div>
 

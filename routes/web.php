@@ -34,6 +34,8 @@ Route::get('/companies', 'HomeController@companies')->name('companies');
 
 Route::get('/jobs', 'HomeController@jobs')->name('jobs');
 
+Route::get('/jobsC', 'HomeController@jobsC')->name('jobsC');
+
 Route::post('/jobs', 'HomeController@addJob')->name('addJob');
 
 Route::get('/jobs/{id}/{status}', 'HomeController@job_status')->name('job_status');
