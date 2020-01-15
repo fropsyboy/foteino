@@ -110,9 +110,11 @@
                                             <p> <strong>Contact Person One</strong> </p>
                                             <div class="col-md-12 col-xs-6 b-r">
                                             <strong>
+                                            @if($profile->contact_person2)
                                             @foreach(unserialize($profile->contact_person1) as $attached)
                                                 {{ $attached}},
                                             @endforeach
+                                            @endif
                                                     </strong> 
                                                     <br>
                                                 </div>
@@ -122,9 +124,11 @@
                                             <p> <strong>Contact Person Two</strong> </p>
                                             <div class="col-md-12 col-xs-6 b-r">
                                             <strong>
+                                            @if($profile->contact_person2)
                                             @foreach(unserialize($profile->contact_person2) as $attached)
                                                 {{ $attached}},
                                             @endforeach
+                                            @endif
                                                     </strong> 
                                                     <br>
                                                 </div>

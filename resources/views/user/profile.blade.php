@@ -136,6 +136,7 @@
                                                         </tr>
                                                     </thead>
                                                 <tbody>
+                                                @if($profile->credentials->degree)
                                                 @foreach(unserialize($profile->credentials->degree) as $attached)
                                                         <tr>
                                                     
@@ -149,6 +150,7 @@
                                                     
                                                         </tr>
                                                     @endforeach
+                                                    @endif
                                                 </tbody>
                                                 </table>
                                             </div>
@@ -180,6 +182,7 @@
                                                         </tr>
                                                     </thead>
                                                 <tbody>
+                                                @if($profile->credentials->employment)
                                                 @foreach(unserialize($profile->credentials->employment) as $attached)
                                                         <tr>
                                                     
@@ -192,6 +195,7 @@
                                                     
                                                         </tr>
                                                     @endforeach
+                                                    @endif
                                                 </tbody>
                                                 </table>
                                             </div>
@@ -206,9 +210,11 @@
                                     <div class="row">
                                          <div class="col-md-12 col-xs-6 b-r">
                                          <strong>
+                                         @if($profile->credentials->subjects)
                                          @foreach(unserialize($profile->credentials->subjects) as $attached2)
                                             {{$attached2}},
                                         @endforeach
+                                        @endif
                                                 </strong> 
                                                 <br>
                                             </div>

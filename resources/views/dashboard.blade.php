@@ -164,6 +164,7 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
+                        <tbody>
                         <?php $i = 1; ?>
                         @foreach($applications as $item)
                             <tr>
@@ -174,7 +175,7 @@
                                 </a>
                             </td>
                             <td> 
-                            <a href="{{route('profiles',['id' => $item->id])}}">
+                            <a href="{{route('profiles',['id' => $item->cleanCompany->id])}}">
                             {{$item->cleanCompany->name}}
                             </a>
                             </td>
@@ -196,7 +197,7 @@
                             </tr>
                         <?php $i++; ?>
                         @endforeach
-                        <tbody>
+                        
                         </tbody>
                         
                     </table>
@@ -217,21 +218,61 @@
                 </div>
                 
                 <div class="table-responsive">
-                <table id="myTable" class="table display table-bordered table-striped no-wrap">
+                <table id="example" class="table display table-bordered table-striped no-wrap">
                         <thead>
                             <tr>
                             <th>S/N</th>
                                 <th>Name</th>
                                 <th>Job Title</th>
-                                <th>Available Date</th>
-                                <th>Into</th>
-                                <th>Date Applied</th>
+                                <th>Gender</th>
+                                <th>Location</th>
+                                <th>Phone</th>
+                                <th>Email</th>
                                 <th>Status</th>
                                 
                             </tr>
                         </thead>
                         
                         <tbody>
+                        <?php $i = 1; ?>
+                        @foreach($applicants as $item)
+                            <tr>
+                            <td>{{$i}}</td>
+                            <td>
+                                <a href="{{route('profiles',['id' => $item->id])}}" >
+                                    {{$item->user->name}}
+                                </a>
+                            </td>
+                            <td> 
+                            {{$item->job->title}}
+                            </td>
+                            <td> 
+                            {{$item->user->gender}}
+                            </td>
+                            <td> 
+                            {{$item->user->state}}
+                            </td>
+                            <td> 
+                            {{$item->user->phone}}
+                            </td>
+
+                            <td> 
+                            {{$item->user->email}}
+                            </td>
+                            
+                            
+                            <td>
+                            <a href="{{route('job_status',['id' => $item->id, 'status' => $item->status])}}" >
+                                    @if($item->status == 'active')
+                                    <span class="btn btn-success btn-sm">Active</span>
+                                    @else
+                                    <span class="btn btn-danger btn-sm">{{$item->status}}</span>
+                                    @endif
+                                </a>
+                            </td>
+                            </tr>
+                        <?php $i++; ?>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

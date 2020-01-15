@@ -10,6 +10,7 @@ use App\Job;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use Illuminate\Support\Facades\Hash;
+use App\Application;
 
 class HomeController extends Controller
 {
@@ -38,19 +39,19 @@ class HomeController extends Controller
             $applications = Job::with('cleanCompany')->where('user_id', $user->id)->orderby('id','desc')->paginate(10);
             $applicationsCount = Job::where('user_id', $user->id)->orderby('id','desc')->count();
 
-            $applicants = Job::where('user_id', $user->id)->orderby('id','desc')->paginate(10);
-            $applicantsCount = Job::where('user_id', $user->id)->orderby('id','desc')->count();
+            $applicants = Application::with('user', 'job')->where('user_id', $user->id)->orderby('id','desc')->paginate(10);
+            $applicantsCount = Application::where('user_id', $user->id)->orderby('id','desc')->count();
 
-            $applicantsApproved = Job::where('user_id', $user->id)->orderby('id','desc')->paginate(10);
-            $applicantsPending = Job::where('user_id', $user->id)->orderby('id','desc')->count();
+            $applicantsApproved = Application::where('user_id', $user->id)->where('status', 'active')->orderby('id','desc')->count();
+            $applicantsPending = Application::where('user_id', $user->id)->where('status', 'disable')->orderby('id','desc')->count();
 
             $data = [
                 'applications' => $applications,
                 'applicationsCount' => $applicationsCount,
                 'applicants' => $applicants,
                 'applicantsCount' => $applicantsCount,
-                'user' => $user,
-                'companies' => $companies,
+                'pending' => $applicantsPending,
+                'approved' => $applicantsApproved,
             ];
 
 
@@ -60,8 +61,8 @@ class HomeController extends Controller
             $applications = Job::orderby('id','desc')->paginate(10);
             $applicationsCount = Job::count();
 
-            $applicants = Job::orderby('id','desc')->paginate(10);
-            $applicantsCount = Job::count();
+            $applicants = Application::with('user', 'job')->orderby('id','desc')->paginate(10);
+            $applicantsCount = Application::count();
 
             $user = User::where('type', 0 )->orderby('id','desc')->count();
 
@@ -94,12 +95,13 @@ class HomeController extends Controller
     {
         $profileData = $this->getProfileData($id);
 
+        $getType = User::find($id);
 
         $data = [
             'profile' => $profileData,
         ];
 
-        if($profileData->credentials== null){
+        if($getType->type == 1){
            return view('user.profile2', $data);
         }
 
@@ -251,7 +253,8 @@ class HomeController extends Controller
     public function applications()
     {
         
-        $applicant = [];
+        $applicant = Application::with('user', 'job')->orderby('id','desc')->paginate(10);
+
 
 
         $data = [
@@ -300,6 +303,23 @@ class HomeController extends Controller
         Alert::success('Success', 'Admin Successfully Added');
         
         return back();
+    }
+
+    public function getOneapplication($job_id)
+    {
+        try {
+            $job = Application::with('user', 'job')->where('job_id', $job_id)->orderby('id','desc')->paginate(10);
+
+            $data = [
+                'job' => $job,
+            ];
+
+            return response()->json(['jobs' => $job], 200);
+
+        }catch (\Exception $e) {
+            $message =  $e->getMessage();
+             Alert::error('Error', $message);
+        }
     }
 
 }
