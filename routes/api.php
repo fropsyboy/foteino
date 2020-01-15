@@ -34,6 +34,8 @@ Route::group([ 'prefix' => 'v1'], function () {
         Route::get('user', 'API\AuthController@user');
         Route::post('updateProfile', 'API\AuthController@updateProfile');
         Route::get('jobs', 'API\AuthController@jobs');
+        Route::get('job/{id}', 'API\AuthController@job');
+
 
     });
 });

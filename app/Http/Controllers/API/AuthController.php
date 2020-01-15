@@ -268,4 +268,20 @@ class AuthController extends Controller
 
         return response()->json(['jobs' => $jobs], 200);
     }
+
+    public function job($id)
+    {
+        try {
+            $job = Job::where('id',$id)->first();
+
+            $data = [
+                'job' => $job,
+            ];
+
+            return response()->json(['jobs' => $job], 200);
+
+        }catch (\Exception $e) {
+            return response()->json(['error' => $e], 401);
+        }
+    }
 }
