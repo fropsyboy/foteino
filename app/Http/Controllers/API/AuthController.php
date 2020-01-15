@@ -303,6 +303,7 @@ class AuthController extends Controller
         }
 
         try {
+            $user = auth()->user();
 
             $check = Application::where('job_id', $request->job_id)->where('user_id',$user->id)->count();
 
