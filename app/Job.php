@@ -15,4 +15,9 @@ class Job extends Model
     {
         return $this->belongsTo('App\User','user_id');
     }
+
+    public function cleanCompany()
+    {
+        return $this->belongsTo('App\User','user_id')->select(['id', 'name', 'country', 'state', 'sector', 'industry', 'description']);
+    }
 }

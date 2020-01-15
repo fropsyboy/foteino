@@ -33,6 +33,7 @@ Route::group([ 'prefix' => 'v1'], function () {
         Route::get('logout', 'API\AuthController@logout');
         Route::get('user', 'API\AuthController@user');
         Route::post('updateProfile', 'API\AuthController@updateProfile');
+        Route::get('jobs', 'API\AuthController@jobs');
 
     });
 });
