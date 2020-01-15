@@ -211,4 +211,49 @@ class AuthController extends Controller
             'message' => 'Successfully created Company Account'
         ]);
     }
+
+    public function updateProfile(Request $request)
+    {
+
+        $user = auth()->user();
+
+        try {
+
+        User::where('id', $user->id)->update([
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'phone' => $request->phone,
+            'phone2' => $request->phone2,
+            'country' => $request->country,
+            'state' => $request->state,
+            'username' => $request->username,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkd' => $request->linkd,
+            'insta' => $request->insta,
+            'staff_size' => $request->staff_size,
+            'sector' => $request->sector,
+            'industry' => $request->industry,
+            'years' => $request->years,
+        ]);
+
+        Credential::where('user_id', $user->id)->update([
+            'qualification' => $request->qualification,
+            'examing_body' => $request->examing_body,
+            'subjects' => serialize($request->subjects),
+            'o_level_passed' => $request->o_level_passed,
+            'skills' => $request->skills,
+            'training_courses' => $request->training_courses,
+            'career_path' => $request->career_path,
+            'degree' => serialize($request->degree),
+            'employment' => serialize($request->employment),
+        ]);
+
+        return response()->json(['success' => 'Details Successfully Updated'], 401);
+
+    }catch (\Exception $e) {
+        return response()->json(['error' => $e], 401);
+    }
+    }
 }

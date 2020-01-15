@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+Route::post('/adminLogin', 'Auth\LoginController@adminLogin')->name('adminLogin');
+
+
 Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -44,3 +47,5 @@ Route::get('/applications', 'HomeController@applications')->name('applications')
 Route::get('/admins', 'HomeController@admins')->name('admins');
 
 Route::post('/admins', 'HomeController@addAdmin')->name('addAdmin');
+
+// Route::post('/updateProfile', 'HomeController@updateProfile')->name('updateProfile');
