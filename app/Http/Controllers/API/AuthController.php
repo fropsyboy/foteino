@@ -251,7 +251,7 @@ class AuthController extends Controller
                 'employment' => serialize($request->employment),
             ]);
 
-            return response()->json(['success' => 'Details Successfully Updated'], 401);
+            return response()->json(['success' => 'Details Successfully Updated'], 200);
 
         }catch (\Exception $e) {
             return response()->json(['error' => $e], 401);
