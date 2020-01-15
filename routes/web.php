@@ -47,3 +47,5 @@ Route::get('/applications', 'HomeController@applications')->name('applications')
 Route::get('/admins', 'HomeController@admins')->name('admins');
 
 Route::post('/admins', 'HomeController@addAdmin')->name('addAdmin');
+
+// Route::post('/updateProfile', 'HomeController@updateProfile')->name('updateProfile');
