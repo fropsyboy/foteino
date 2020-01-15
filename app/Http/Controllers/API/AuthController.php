@@ -154,13 +154,13 @@ class AuthController extends Controller
             'years' => $user->years,
             'qualification' => $credentials->qualification,
             'examing_body' => $user->examing_body,
-            'subjects' => unserialize($user->subjects),
+            'subjects' => unserialize($credentials->subjects),
             'o_level_passed' => $user->o_level_passed,
             'skills' => $user->skills,
             'training_courses' => $user->training_courses,
             'career_path' => $credentials->career_path,
-            'degree' => unserialize($user->degree),
-            'employment' => unserialize($user->employment),
+            'degree' => unserialize($credentials->degree),
+            'employment' => unserialize($credentials->employment),
             
         ];
         return response()->json($data);
