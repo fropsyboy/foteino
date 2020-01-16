@@ -56,7 +56,6 @@ class AuthController extends Controller
         }else{
             $user->attachRole(2);
         }
-        $user->attachRole(1);
 
         $credential = new Credential([
             'user_id' => $user->id,
