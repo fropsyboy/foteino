@@ -344,5 +344,24 @@ class AuthController extends Controller
         }
     }
 
+    public function myApplications()
+    {
+        try {
+            $user = auth()->user();
+
+            $applications = Application::with('job')->where('user_id', $user->id)->orderby('id','desc')->get();
+
+            $data = [
+                'applications' => $applications,
+            ];
+
+            return response()->json(['data' => $data], 200);
+
+        }catch (\Exception $e) {
+            $message =  $e->getMessage();
+             Alert::error('Error', $message);
+        }
+    }
+
     
 }

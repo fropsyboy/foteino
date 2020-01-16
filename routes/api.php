@@ -42,6 +42,8 @@ Route::group([ 'prefix' => 'v1'], function () {
 
         Route::post('applyJob', 'API\AuthController@applyJob');
 
+        Route::get('myApplications', 'API\AuthController@myApplications');
+
         
 
     });
