@@ -101,7 +101,16 @@ class AuthController extends Controller
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
+
         $user = $request->user();
+
+        if($user->type != 0){
+            return response()->json([
+                'message' => 'You are not a System User, Please try and Login on the company Portal'
+            ], 400);
+        }
+
+
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
 

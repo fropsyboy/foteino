@@ -239,9 +239,10 @@ class HomeController extends Controller
     public function application($id)
     {
         
-        $applicant = [];
-
         $job = Job::find($id);
+        
+        $applicant = Application::with('job','user')->where('job_id', $id)->get();
+
 
         $data = [
             'job' => $job,
@@ -252,9 +253,9 @@ class HomeController extends Controller
 
     public function applications()
     {
-        
-        $applicant = Application::with('user', 'job')->orderby('id','desc')->paginate(10);
+        $user = auth()->user();
 
+        $applicant = Application::with('user', 'job')->orderby('id','desc')->get();
 
 
         $data = [
@@ -320,6 +321,29 @@ class HomeController extends Controller
             $message =  $e->getMessage();
              Alert::error('Error', $message);
         }
+    }
+
+    public function applicant_status($id, $status)
+    {
+        try {
+            $update = "active";
+            if($status == "active"){
+                $update = "disable";
+            }
+            Application::where('id', $id)->update([
+                'status' => $update
+                    ]);
+            
+            
+            Alert::success('Success', 'Your Job has been successfully created');
+
+            return back();
+        }catch(Exception $e) {
+             $message =  $e->getMessage();
+             Alert::error('Error', $message);
+
+             return back();
+          }
     }
 
 }

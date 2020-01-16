@@ -54,3 +54,4 @@ Route::get('getApplications', 'HomeController@applications')->name('getApplicati
 
 Route::get('getOneapplication/{job_id}', 'HomeController@getOneapplication')->name('getOneapplication');
 
+Route::get('/applicant_status/{id}/{status}', 'HomeController@applicant_status')->name('applicant_status');
