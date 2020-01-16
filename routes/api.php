@@ -27,6 +27,8 @@ Route::group([ 'prefix' => 'v1'], function () {
 
     Route::post('signupCompany', 'API\AuthController@signupCompany');
 
+    Route::get('jobs', 'API\AuthController@jobs');
+
   
     Route::group(['middleware' => 'auth:api'], function() {
 
@@ -35,8 +37,6 @@ Route::group([ 'prefix' => 'v1'], function () {
         Route::get('user', 'API\AuthController@user');
 
         Route::post('updateProfile', 'API\AuthController@updateProfile');
-
-        Route::get('jobs', 'API\AuthController@jobs');
 
         Route::get('job/{id}', 'API\AuthController@job');
 
