@@ -56,7 +56,6 @@ class AuthController extends Controller
         }else{
             $user->attachRole(2);
         }
-        $user->attachRole(1);
 
         $credential = new Credential([
             'user_id' => $user->id,
@@ -161,13 +160,13 @@ class AuthController extends Controller
             'years' => $user->years ? $user->years : 'N/A',
             'qualification' => $credentials->qualification ? $credentials->qualification : 'N/A',
             'examing_body' => $credentials->examing_body ? $credentials->examing_body : 'N/A',
-            'subjects' => $credentials->subjects ? unserialize($credentials->subjects) : 'N/A',
+            'subjects' => $credentials->subjects ? unserialize($credentials->subjects) : null,
             'o_level_passed' => $credentials->o_level_passed ? $credentials->o_level_passed : 'N/A',
             'skills' => $credentials->skills ? $credentials->skills : 'N/A',
             'training_courses' => $credentials->training_courses ? $credentials->training_courses : 'N/A',
             'career_path' => $credentials->career_path ? $credentials->career_path : 'N/A',
-            'degree' => $credentials->degree ? unserialize($credentials->degree) : 'N/A',
-            'employment' => $credentials->employment ? unserialize($credentials->employment) : 'N/A',
+            'degree' => $credentials->degree ? unserialize($credentials->degree) : null,
+            'employment' => $credentials->employment ? unserialize($credentials->employment) : null
             
         ];
         return response()->json($data);
