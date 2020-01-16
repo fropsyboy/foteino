@@ -2,14 +2,14 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('title')
-            Jobs
+        My Applications
         @endslot
 
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                 <li class="breadcrumb-item active">Jobs</li>
-                <li class="breadcrumb-item active">Applications</li>
+                <li class="breadcrumb-item active">My Applications</li>
 
             </ol>
         </div>
@@ -20,41 +20,75 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Applicant</th>
-                                <th>Designation</th>
-                                <th>Skills</th>
+                                <th>Gender</th>
                                 <th>Location</th>
-                                <th>Degree</th>
+                                <th>Date</th>
+                                @role('employer')
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                @endrole
+                                @role('admin')
                                 <th>Status</th>
+                                @endrole
                             </tr>
                         </thead>
                        <tbody>
                        <?php $i = 1; ?>
+                       @role('employer')
                         @foreach($applicant as $item)
-                        @if($item->user_id == Auth::user()->id)
+
+                        @if($item->job->user_id == Auth::user()->id)
                             <tr>
                             <td>{{$i}}</td>
                             <td>
-                                <a href="{{route('job_profile',['id' => $item->id, 'company' => $item->company])}}" >
                                     {{$item->user->name}}
-                                </a>
                             </td>
-                            <td>{{$item->needed}}</td>
-                            <td>{{$item->start}}</td>
-                            <td>{{$item->end}}</td>
-                            <td>{{$item->location}}</td>
+                            <td>{{$item->user->gender}}</td>
+                            <td>{{$item->user->state}}</td>
+                            <td>{{$item->created_at}}</td>
+
+                            @if($item->status == 'active')
+                            <td>{{$item->user->email}}</td>
+                            <td>{{$item->user->phone}}</td>
+                            @else
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            @endif
+                            @endif
+                            </tr>
+                        <?php $i++; ?>
+                        @endforeach
+                        @endrole
+
+                        @role('admin')
+                        @foreach($applicant as $item)
+
+                            <tr>
+                            <td>{{$i}}</td>
                             <td>
-                            <a href="{{route('job_status',['id' => $item->id, 'status' => $item->status])}}" >
+                                    {{$item->user->name}}
+                            </td>
+                            <td>{{$item->user->gender}}</td>
+                            <td>{{$item->user->state}}</td>
+                            <td>{{$item->created_at}}</td>
+                            <td>                    
+                            <a href="{{route('applicant_status',['id' => $item->id, 'status' => $item->status])}}" >    
                                     @if($item->status == 'active')
                                     <span class="btn btn-success btn-sm">Active</span>
                                     @else
                                     <span class="btn btn-danger btn-sm">{{$item->status}}</span>
                                     @endif
-                                </a>
+
+                                    </a>
                             </td>
-                            @endif
+
+                            </td>
+
+                            
                             </tr>
                         <?php $i++; ?>
                         @endforeach
+                        @endrole
                        </tbody>
                     </table>
                 </div>

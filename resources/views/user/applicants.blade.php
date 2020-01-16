@@ -21,11 +21,10 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Applicant</th>
-                                <th>Designation</th>
-                                <th>Skills</th>
+                                <th>Gender</th>
                                 <th>Location</th>
-                                <th>Degree</th>
-                                <th>Status</th>
+                                <th>Date</th>
+                                
                             </tr>
                         </thead>
                        <tbody>
@@ -33,24 +32,14 @@
                         @foreach($applicant as $item)
                             <tr>
                             <td>{{$i}}</td>
-                            <!-- <td>
-                                <a href="{{route('job_profile',['id' => $item->id, 'company' => $item->company])}}" >
-                                    {{$item->title}}
-                                </a>
-                            </td>
-                            <td>{{$item->needed}}</td>
-                            <td>{{$item->start}}</td>
-                            <td>{{$item->end}}</td>
-                            <td>{{$item->location}}</td>
                             <td>
-                            <a href="{{route('job_status',['id' => $item->id, 'status' => $item->status])}}" >
-                                    @if($item->status == 'active')
-                                    <span class="btn btn-success btn-sm">Active</span>
-                                    @else
-                                    <span class="btn btn-danger btn-sm">{{$item->status}}</span>
-                                    @endif
-                                </a>
-                            </td> -->
+                                    {{$item->user->name}}
+                            </td>
+                            <td>{{$item->user->gender}}</td>
+                            <td>{{$item->user->state}}</td>
+                            <td>{{$item->created_at}}</td>
+                            
+                            
                             </tr>
                         <?php $i++; ?>
                         @endforeach

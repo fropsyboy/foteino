@@ -21,7 +21,7 @@ class Application extends Model
     public function job()
     {
         return $this->belongsTo('App\Job','job_id')->select([
-            'id', 'title', 'location', 'type', 'needed', 'salary', 'start', 'end'
+            'id', 'user_id' ,'title', 'location', 'type', 'needed', 'salary', 'start', 'end'
             ]);
     }
 }
