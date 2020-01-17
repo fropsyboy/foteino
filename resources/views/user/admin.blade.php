@@ -24,6 +24,7 @@
                                 <th>Email</th>
                                 <th>Number</th>
                                 <th>Created at</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                        <tbody>
@@ -40,6 +41,15 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->phone}}</td>
                             <td>{{$item->created_at}}</td>
+                            <td>
+                            <a href="{{route('admin_status',['id' => $item->id, 'status' => $item->status])}}" >
+                                    @if($item->status == 'active')
+                                    <span class="btn btn-success btn-sm">Active</span>
+                                    @else
+                                    <span class="btn btn-danger btn-sm">{{$item->status}}</span>
+                                    @endif
+                                </a>
+                            </td>
                            
                             </tr>
                         <?php $i++; ?>
