@@ -267,7 +267,7 @@ class HomeController extends Controller
     public function admins()
     {
         
-        $admins = User::select('id', 'name','username', 'email', 'phone', 'created_at')->where('type',2)->get();
+        $admins = User::select('id', 'name','username', 'email', 'phone', 'created_at', 'status')->where('type',2)->get();
 
 
         $data = [
@@ -331,6 +331,29 @@ class HomeController extends Controller
                 $update = "disable";
             }
             Application::where('id', $id)->update([
+                'status' => $update
+                    ]);
+            
+            
+            Alert::success('Success', 'Your Job has been successfully created');
+
+            return back();
+        }catch(Exception $e) {
+             $message =  $e->getMessage();
+             Alert::error('Error', $message);
+
+             return back();
+          }
+    }
+
+    public function admin_status($id, $status)
+    {
+        try {
+            $update = "active";
+            if($status == "active"){
+                $update = "disabled";
+            }
+            User::where('id', $id)->update([
                 'status' => $update
                     ]);
             

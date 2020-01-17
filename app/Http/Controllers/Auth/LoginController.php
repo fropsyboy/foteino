@@ -56,7 +56,7 @@ class LoginController extends Controller
             return back();
         }
 
-        $check = User::where('type', '!=', 0)->where('email', $request->email)->first();
+        $check = User::where('type', '!=', 0)->where('email', $request->email)->where('status', 'active')->first();
 
         if($check){
 
