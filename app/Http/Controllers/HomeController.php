@@ -110,7 +110,7 @@ class HomeController extends Controller
 
     public function applicants()
     {
-        $user = User::where('type',0)->orderby('id','desc')->paginate(12);
+        $user = User::with('credentials')->where('type',0)->orderby('id','desc')->get();
 
         $data = [
             'applicants' => $user,
@@ -121,7 +121,7 @@ class HomeController extends Controller
 
     public function companies()
     {
-        $companies = User::where('type',1)->orderby('id','desc')->paginate(9);
+        $companies = User::where('type',1)->orderby('id','desc')->get();
 
         $data = [
             'companies' => $companies,
