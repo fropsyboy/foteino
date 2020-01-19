@@ -52,8 +52,8 @@
                     </li>
 
 
-                    <li class="nav-small-cap">--- SUPPORT</li>
-                    <li> <a class="waves-effect waves-dark" href="{{route('empty')}}" aria-expanded="false"><i class="far fa-circle text-success"></i><span class="hide-menu">Tickets</span></a></li>
+                    <!-- <li class="nav-small-cap">--- SUPPORT</li>
+                    <li> <a class="waves-effect waves-dark" href="{{route('empty')}}" aria-expanded="false"><i class="far fa-circle text-success"></i><span class="hide-menu">Tickets</span></a></li> -->
                 </li>
                 @endrole
             </ul>
