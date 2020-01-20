@@ -29,6 +29,8 @@ Route::group([ 'prefix' => 'v1'], function () {
 
     Route::get('jobs', 'API\AuthController@jobs');
 
+    Route::get('attributes', 'API\AuthController@getAttributes');
+
   
     Route::group(['middleware' => 'auth:api'], function() {
 

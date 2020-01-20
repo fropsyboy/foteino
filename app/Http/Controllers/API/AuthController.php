@@ -380,5 +380,14 @@ class AuthController extends Controller
         }
     }
 
+    public function getAttributes()
+    {
+        $attributes = [
+         'title', 'location', 'type', 'experience', 'salary',
+        ];
+
+        return response()->json($attributes);
+    }
+
     
 }
