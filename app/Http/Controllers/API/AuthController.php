@@ -178,6 +178,14 @@ class AuthController extends Controller
             'employment' => $credentials->employment ? unserialize($credentials->employment) : null
             
         ];
+
+        $profile_check = collect($data)->contains('N/A');
+
+        $profile_incomplete = [
+            'profile_incomplete' => $profile_check
+        ];
+
+        array_push($data, $profile_incomplete);
         return response()->json($data);
     }
 
