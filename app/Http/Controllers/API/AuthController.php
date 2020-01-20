@@ -389,5 +389,26 @@ class AuthController extends Controller
         return response()->json($attributes);
     }
 
+    public function searchJobs(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'query' => 'required|string',
+            'category' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+
+        $search = Job::with('cleanCompany')->where( $request->category, 'like', '%'.$request->get('query').'%' )->orderby('id','desc')->get();
+
+        $data = [
+            'jobs' => $search,
+        ];
+
+        return response()->json($data);
+    }
+
     
 }
