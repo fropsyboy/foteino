@@ -19,6 +19,9 @@
                         <thead>
                             <tr>
                                 <th>S/N</th>
+                                <th>Job Title</th>
+                                <th>Type</th>
+                                <th>Location</th>
                                 <th>Applicant</th>
                                 <th>Gender</th>
                                 <th>Location</th>
@@ -27,8 +30,9 @@
                                 <th>Email</th>
                                 <th>Phone Number</th>
                                 @endrole
-                                @role('admin')
                                 <th>Status</th>
+                                @role('admin')
+                                <th>Request</th>
                                 @endrole
                             </tr>
                         </thead>
@@ -40,8 +44,11 @@
                         @if($item->job->user_id == Auth::user()->id)
                             <tr>
                             <td>{{$i}}</td>
+                            <td>{{$item->job->title}}</td>
+                            <td>{{$item->job->type}}</td>
+                            <td>{{$item->job->location}}</td>
                             <td>
-                                    {{$item->user->name}}
+                                {{$item->user->name}}
                             </td>
                             <td>{{$item->user->gender}}</td>
                             <td>{{$item->user->state}}</td>
@@ -50,9 +57,24 @@
                             @if($item->status == 'active')
                             <td>{{$item->user->email}}</td>
                             <td>{{$item->user->phone}}</td>
+                            <td>
+                            <span class="btn btn-success btn-sm">Active</span>
+                            </td>
                             @else
                             <td>N/A</td>
                             <td>N/A</td>
+                            <td>                    
+                              
+                                    @if($item->request == 'no')
+                                    <a href="{{route('request_status',['id' => $item->id])}}" >  
+                                    <span class="btn btn-info btn-sm">Request</span>
+                                    </a>
+                                    @else
+                                    <span class="btn btn-primary btn-sm">Pending</span>
+                                    @endif
+
+                                    
+                            </td>
                             @endif
                             @endif
                             </tr>
@@ -65,6 +87,9 @@
 
                             <tr>
                             <td>{{$i}}</td>
+                            <td>{{$item->job->title}}</td>
+                            <td>{{$item->job->type}}</td>
+                            <td>{{$item->job->location}}</td>
                             <td>
                                     {{$item->user->name}}
                             </td>
@@ -81,7 +106,12 @@
 
                                     </a>
                             </td>
-
+                            <td>
+                            @if($item->request == 'yes')
+                                    <span class="btn btn-success btn-sm">{{$item->request}}</span>
+                                    @else
+                                    <span class="btn btn-danger btn-sm">{{$item->request}}</span>
+                                    @endif
                             </td>
 
                             
