@@ -8,7 +8,7 @@ class Application extends Model
 {
     //
     protected $fillable = [
-        'user_id', 'job_id', 'status', 'note' 
+        'user_id', 'job_id', 'status', 'note',  'request'
     ];
 
     public function user()
@@ -21,7 +21,7 @@ class Application extends Model
     public function job()
     {
         return $this->belongsTo('App\Job','job_id')->select([
-            'id', 'user_id' ,'title', 'location', 'type', 'needed', 'salary', 'start', 'end'
+            'id', 'user_id' ,'title', 'location', 'type', 'needed', 'salary', 'start', 'end',
             ]);
     }
 }

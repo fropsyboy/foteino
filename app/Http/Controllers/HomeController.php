@@ -369,5 +369,25 @@ class HomeController extends Controller
           }
     }
 
+    public function request_status($id)
+    {
+        try {
+            
+            Application::where('id', $id)->update([
+                'request' => 'yes'
+                    ]);
+            
+            
+            Alert::success('Success', 'Your Job has been successfully created');
+
+            return back();
+        }catch(Exception $e) {
+             $message =  $e->getMessage();
+             Alert::error('Error', $message);
+
+             return back();
+          }
+    }
+
 
 }

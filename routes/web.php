@@ -57,3 +57,5 @@ Route::get('getOneapplication/{job_id}', 'HomeController@getOneapplication')->na
 Route::get('/applicant_status/{id}/{status}', 'HomeController@applicant_status')->name('applicant_status');
 
 Route::get('/admin_status/{id}/{status}', 'HomeController@admin_status')->name('admin_status');
+
+Route::get('/request_status/{id}', 'HomeController@request_status')->name('request_status');
