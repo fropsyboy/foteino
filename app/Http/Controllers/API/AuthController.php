@@ -152,7 +152,7 @@ class AuthController extends Controller
         $data = [
             'name' => $user->name ? $user->name : 'N/A',
             'gender' => $user->gender  ? $user->gender : 'N/A',
-            'dob' => $user->dob ? $user->dob : 'N/A',
+            'dob' => $user->dob ? $user->dob : '01/01/2020',
             'phone' => $user->phone ? $user->phone : 'N/A',
             'phone2' => $user->phone2 ? $user->phone2 : 'N/A',
             'country' => $user->country ? $user->country : 'N/A',
