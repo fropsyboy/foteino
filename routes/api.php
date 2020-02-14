@@ -33,7 +33,11 @@ Route::group([ 'prefix' => 'v1'], function () {
 
     Route::post('searchJobs', 'API\AuthController@searchJobs');
 
-  
+    Route::post('reset', 'API\AuthController@reset');
+
+    Route::post('resetPassword', 'API\AuthController@resetPassword');
+
+
     Route::group(['middleware' => 'auth:api'], function() {
 
         Route::get('logout', 'API\AuthController@logout');
@@ -48,7 +52,6 @@ Route::group([ 'prefix' => 'v1'], function () {
 
         Route::get('myApplications', 'API\AuthController@myApplications');
 
-        
 
     });
 });

@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Credential;
 use App\Job;
 use App\Application;
+use Illuminate\Support\Str;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -75,7 +77,7 @@ class AuthController extends Controller
             'user' => $user
         ]);
     }
-  
+
     /**
      * Login user and create token
      *
@@ -124,7 +126,7 @@ class AuthController extends Controller
             )->toDateTimeString()
         ]);
     }
-  
+
     /**
      * Logout user (Revoke the token)
      *
@@ -137,7 +139,7 @@ class AuthController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
-  
+
     /**
      * Get the authenticated User
      *
@@ -176,7 +178,7 @@ class AuthController extends Controller
             'career_path' => $credentials->career_path ? $credentials->career_path : 'N/A',
             'degree' => $credentials->degree ? unserialize($credentials->degree) : null,
             'employment' => $credentials->employment ? unserialize($credentials->employment) : null
-            
+
         ];
 
         $profile_check = collect($data)->contains('N/A');
@@ -312,7 +314,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'job_id' => 'required',
-            
+
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
@@ -328,7 +330,7 @@ class AuthController extends Controller
             }
 
             $user = auth()->user();
-            
+
             $job = new Application([
                 'user_id' => $user->id,
                 'job_id' => $request->job_id,
@@ -410,5 +412,59 @@ class AuthController extends Controller
         return response()->json($data);
     }
 
-    
+    public function reset(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        $rand = Str::random(6);
+
+        User::where('email', $request->email)->update([
+            'reset' => $rand,
+        ]);
+
+        $to_name = $request->email;
+        $to_email = $request->email;
+        $data = array('name'=> $to_name, "body" => "Please follow this link http://foteinotalento.com/resetpassword and use your code to reset the password ".$rand);
+
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)->subject('Login 2FA');
+            $message->from('info@foteinotaleto.com','Password Reset');
+        });
+
+        return response()->json(['response' => 'A reset link has been sent to your email'], 200);
+    }
+
+    public function resetPassword(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string',
+            'code' => 'required|string',
+            'password' => 'required|string',
+            'cpassword' => 'required|same:password'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        $search = User::where('email', $request->email)->where('reset',  $request->code)->count();
+
+        if ($search > 0){
+            User::where('email', $request->email)->update([
+                'password' => bcrypt($request->password),
+            ]);
+            return response()->json(['jobs' => 'Your password reset was successful '], 200);
+        }
+
+        return response()->json(['response' => 'Please check your email and the code sent to your email again '], 400);
+
+    }
+
+
 }
