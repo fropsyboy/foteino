@@ -285,7 +285,8 @@ class AuthController extends Controller
 
     public function jobs()
     {
-        $jobs = Job::with('cleanCompany')->orderby('id','desc')->get();
+        $currentDate = date('Y-m-d');
+        $jobs = Job::with('cleanCompany')->whereDate('end', '>=', $currentDate)->orderby('id','desc')->get();
 
         $data = [
             'jobs' => $jobs,
@@ -402,9 +403,11 @@ class AuthController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
 
+        $currentDate = date('Y-m-d');
 
-        $search = Job::with('cleanCompany')->where( $request->category, 'like', '%'.$request->get('query').'%' )->orderby('id','desc')->get();
+        $search = Job::with('cleanCompany')->where( $request->category, 'like', '%'.$request->get('query').'%' )->whereDate('end', '>=', $currentDate)->orderby('id','desc')->get();
 
+        dd($search);
         $data = [
             'jobs' => $search,
         ];

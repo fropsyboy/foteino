@@ -32,9 +32,9 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
+
         if($user->type == 1){
-            
+
 
             $applications = Job::with('cleanCompany')->where('user_id', $user->id)->orderby('id','desc')->paginate(10);
             $applicationsCount = Job::where('user_id', $user->id)->orderby('id','desc')->count();
@@ -81,7 +81,7 @@ class HomeController extends Controller
             return view('dashboard', $data);
 
         }
-        
+
     }
 
 
@@ -180,6 +180,8 @@ class HomeController extends Controller
         }
         $user = auth()->user();
 
+        $endDate = date('Y-m-d', strtotime("+3 months", strtotime($request->start)));
+
         $job = new Job([
             'user_id' => $user->id,
             'title' => $request->title,
@@ -189,7 +191,7 @@ class HomeController extends Controller
             'salary' => $request->salary,
             'needed' => $request->needed,
             'start' => $request->start,
-            'end' => $request->end,
+            'end' => $endDate,
             'description' => $request->description,
         ]);
         $job->save();
@@ -208,8 +210,8 @@ class HomeController extends Controller
             Job::where('id', $id)->update([
                 'status' => $update
                     ]);
-            
-            
+
+
             Alert::success('Success', 'Your Job has been successfully created');
 
             return back();
@@ -224,7 +226,7 @@ class HomeController extends Controller
 
     public function job_profile($id, $company)
     {
-        
+
         $profile = User::find($company);
 
         $job = Job::find($id);
@@ -238,9 +240,9 @@ class HomeController extends Controller
 
     public function application($id)
     {
-        
+
         $job = Job::find($id);
-        
+
         $applicant = Application::with('job','user')->where('job_id', $id)->get();
 
 
@@ -266,7 +268,7 @@ class HomeController extends Controller
 
     public function admins()
     {
-        
+
         $admins = User::select('id', 'name','username', 'email', 'phone', 'created_at', 'status')->where('type',2)->get();
 
 
@@ -302,7 +304,7 @@ class HomeController extends Controller
         $admin->attachRole(5);
 
         Alert::success('Success', 'Admin Successfully Added');
-        
+
         return back();
     }
 
@@ -333,8 +335,8 @@ class HomeController extends Controller
             Application::where('id', $id)->update([
                 'status' => $update
                     ]);
-            
-            
+
+
             Alert::success('Success', 'Your Job has been successfully created');
 
             return back();
@@ -356,8 +358,8 @@ class HomeController extends Controller
             User::where('id', $id)->update([
                 'status' => $update
                     ]);
-            
-            
+
+
             Alert::success('Success', 'Your Job has been successfully created');
 
             return back();
@@ -372,12 +374,12 @@ class HomeController extends Controller
     public function request_status($id)
     {
         try {
-            
+
             Application::where('id', $id)->update([
                 'request' => 'yes'
                     ]);
-            
-            
+
+
             Alert::success('Success', 'Your Job has been successfully created');
 
             return back();

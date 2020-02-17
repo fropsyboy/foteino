@@ -7,8 +7,8 @@
 {{--                    <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />--}}
                 </b>
                 <span>
-                    <img src="{{asset('assets/images/log2.png')}}" alt="homepage" class="dark-logo" />
-                    <img src="{{asset('assets/images/log2.png')}}" class="light-logo" alt="homepage" />
+                    <img src="{{asset('assets/images/lo.png')}}" alt="homepage" class="dark-logo" />
+                    <img src="{{asset('assets/images/lo.png')}}" class="light-logo" alt="homepage" />
                 </span>
             </a>
         </div>
