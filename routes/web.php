@@ -59,3 +59,11 @@ Route::get('/applicant_status/{id}/{status}', 'HomeController@applicant_status')
 Route::get('/admin_status/{id}/{status}', 'HomeController@admin_status')->name('admin_status');
 
 Route::get('/request_status/{id}', 'HomeController@request_status')->name('request_status');
+
+Route::get('/reset', 'PagesController@reset')->name('reset');
+
+Route::post('/reset', 'PagesController@reset_post')->name('reset_post');
+
+Route::get('/reset_get', 'PagesController@reset_get')->name('reset_get');
+
+Route::post('/reset_get', 'PagesController@resetPassword')->name('update_password');
