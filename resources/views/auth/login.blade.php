@@ -19,8 +19,8 @@
    <body>
       <div class="mid-class">
          <div class="art-right-w3ls">
-         
-            <h2>Sign In to 
+
+            <h2>Sign In to
                  <a href="https://foteinotalento.com" style="color: #205e7e">
                      <b> Foteino Talento </b>
                 </a>
@@ -58,7 +58,7 @@
                   <span class="remenber-me">Remember me </span>
                </div>
                <div class="right-side-forget">
-                  <a href="#" class="for">Forgot password...?</a>
+                  <a href="{{route('reset')}}" class="for">Forgot password...?</a>
                </div>
                <div class="clear"></div>
                <div class="btnn">
@@ -71,7 +71,7 @@
                   </a>
                </h3>
             </div>
- 
+
          </div>
          <div class="art-left-w3ls">
             <h1 class="header-w3ls">
