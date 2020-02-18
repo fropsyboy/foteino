@@ -428,7 +428,7 @@ class AuthController extends Controller
         $check = User::where('email',$request->email)->count();
 
         if ($check < 1){
-            return response()->json(['response' => 'Your Email dose not exist in the system'], 400);
+            return response()->json(['response' => 'Your Email does not exist in the system'], 400);
         }
 
         $rand = Str::random(6);
