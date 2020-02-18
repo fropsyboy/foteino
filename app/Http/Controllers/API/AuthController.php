@@ -433,10 +433,10 @@ class AuthController extends Controller
 
         $to_name = $request->email;
         $to_email = $request->email;
-        $data = array('name'=> $to_name, "body" => "Please follow this link http://foteinotalento.com/resetpassword and use your code to reset the password ".$rand);
+        $data = array('name'=> $to_name, "body" => "Please use this code to reset the password ".$rand);
 
         Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)->subject('Login 2FA');
+            $message->to($to_email, $to_name)->subject('Password Reset');
             $message->from('info@foteinotaleto.com','Password Reset');
         });
 
@@ -462,7 +462,7 @@ class AuthController extends Controller
             User::where('email', $request->email)->update([
                 'password' => bcrypt($request->password),
             ]);
-            return response()->json(['jobs' => 'Your password reset was successful '], 200);
+            return response()->json(['response' => 'Your password reset was successful '], 200);
         }
 
         return response()->json(['response' => 'Please check your email and the code sent to your email again '], 400);
