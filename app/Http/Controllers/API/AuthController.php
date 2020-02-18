@@ -425,6 +425,12 @@ class AuthController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
 
+        $check = User::where('email',$request->email)->count();
+
+        if ($check < 1){
+            return response()->json(['response' => 'Your Email dose not exist in the system'], 400);
+        }
+
         $rand = Str::random(6);
 
         User::where('email', $request->email)->update([
