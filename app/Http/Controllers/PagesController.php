@@ -38,7 +38,7 @@ class PagesController extends Controller
 
         $to_name = $request->email;
         $to_email = $request->email;
-        $data = array('name'=> $to_name, "body" => "Please follow this link http://foteinotalento.com/resetpassword and use your code to reset the password ".$rand);
+        $data = array('name'=> $to_name, "body" => "Please use this code to reset the password ".$rand);
 
         Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)->subject('Login 2FA');

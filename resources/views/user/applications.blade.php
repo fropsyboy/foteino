@@ -26,6 +26,7 @@
                                 <th>Gender</th>
                                 <th>Location</th>
                                 <th>Date</th>
+                                
                                 @role('employer')
                                 <th>Email</th>
                                 <th>Phone Number</th>
@@ -34,6 +35,7 @@
                                 @role('admin')
                                 <th>Request</th>
                                 @endrole
+                                <th>Note</th>
                             </tr>
                         </thead>
                        <tbody>
@@ -53,7 +55,7 @@
                             <td>{{$item->user->gender}}</td>
                             <td>{{$item->user->state}}</td>
                             <td>{{$item->created_at}}</td>
-
+                            
                             @if($item->status == 'active')
                             <td>{{$item->user->email}}</td>
                             <td>{{$item->user->phone}}</td>
@@ -77,6 +79,7 @@
                             </td>
                             @endif
                             @endif
+                            <td>{{$item->note}}</td>
                             </tr>
                         <?php $i++; ?>
                         @endforeach
@@ -96,6 +99,7 @@
                             <td>{{$item->user->gender}}</td>
                             <td>{{$item->user->state}}</td>
                             <td>{{$item->created_at}}</td>
+                            
                             <td>                    
                             <a href="{{route('applicant_status',['id' => $item->id, 'status' => $item->status])}}" >    
                                     @if($item->status == 'active')
@@ -114,7 +118,7 @@
                                     @endif
                             </td>
 
-                            
+                            <td>{{$item->note}}</td>
                             </tr>
                         <?php $i++; ?>
                         @endforeach
