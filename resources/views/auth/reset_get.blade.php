@@ -50,12 +50,12 @@
                     </div>
 
                     <div class="form-left-to-w3l">
-                        <input type="password" name="password"  required  autofocus>
+                        <input type="password" name="password" placeholder="Password"  required  autofocus>
 
                     </div>
 
                     <div class="form-left-to-w3l">
-                        <input type="password" name="cpassword"  required autofocus>
+                        <input type="password" name="cpassword"  placeholder="Confirm Password"  required autofocus>
 
                     </div>
 
