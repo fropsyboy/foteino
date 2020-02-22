@@ -78,8 +78,9 @@
                                     
                             </td>
                             @endif
-                            @endif
                             <td>{{$item->note}}</td>
+                            @endif
+                           
                             </tr>
                         <?php $i++; ?>
                         @endforeach
