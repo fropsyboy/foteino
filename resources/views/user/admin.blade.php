@@ -33,9 +33,9 @@
                             <tr>
                             <td>{{$i}}</td>
                             <td>
-                                <a href="{{route('job_profile',['id' => $item->id, 'company' => $item->company])}}" >
+                                <!-- <a href="{{route('job_profile',['id' => $item->id, 'company' => $item->company])}}" > -->
                                     {{$item->name}}
-                                </a>
+                                <!-- </a> -->
                             </td>
                             <td>{{$item->username}}</td>
                             <td>{{$item->email}}</td>

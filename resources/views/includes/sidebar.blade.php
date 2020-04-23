@@ -3,11 +3,11 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="user-pro"> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                @if(Auth::user()->gender == "Male")
+                <!-- @if(Auth::user()->gender == "Male")
                     <img src="{{asset('assets/images/users/male.png')}}" alt="user-img" class="img-circle">
                     @else
                     <img src="{{asset('assets/images/users/female2.png')}}" alt="user-img" class="img-circle">
-                    @endif
+                    @endif -->
                     
                     <span class="hide-menu">{{ Auth::user()->name }}</span></a>
                     <ul aria-expanded="false" class="collapse">
