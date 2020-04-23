@@ -17,7 +17,7 @@
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                                 <li class="breadcrumb-item active">Profile</li>
                             </ol>
-                            <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>
+                            <!-- <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button> -->
                         </div>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 <!-- Row -->
                 <div class="row">
                     <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                    <!-- <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-body">
                                 <center class="m-t-30"> <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
@@ -57,14 +57,15 @@
                                 <button class="btn btn-circle btn-secondary"><i class="fab fa-youtube"></i></button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Column -->
                     <!-- Column -->
-                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                    <div class="col-lg-12 col-xlg-12 col-md-7">
                         <div class="card">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs profile-tab" role="tablist">
                                 <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Settings</a> </li>
+                                <!-- <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#password" role="tab">Password</a> </li> -->
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
@@ -72,49 +73,48 @@
                             
                                 <div class="tab-pane active" id="settings" role="tabpanel">
                                     <div class="card-body">
-                                        <form class="form-horizontal form-material">
+                                        <form class="form-horizontal form-material" method="POST" action="{{route('editProfile')}}" enctype="multipart/form-data">
+                                        @csrf
                                             <div class="form-group">
-                                                <label class="col-md-12">Full Name</label>
+                                                <label class="col-md-12">First Name</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                                                    <input type="text" value="{{Auth::user()->name}} " name="name" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-12">Middle Name</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" value="{{Auth::user()->m_name}} " name="m_name" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-12">Last Name</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" value="{{Auth::user()->l_name}} " name="l_name"  class="form-control form-control-line">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email" class="col-md-12">Email</label>
                                                 <div class="col-md-12">
-                                                    <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                                    <input type="email" value="{{Auth::user()->email}} " class="form-control form-control-line" name="email" id="example-email" disabled>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label class="col-md-12">Password</label>
                                                 <div class="col-md-12">
                                                     <input type="password" value="password" class="form-control form-control-line">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="form-group">
                                                 <label class="col-md-12">Phone No</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
+                                                    <input type="text" placeholder="{{Auth::user()->phone}}" class="form-control" name="phone"  form-control-line">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-md-12">Message</label>
-                                                <div class="col-md-12">
-                                                    <textarea rows="5" class="form-control form-control-line"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-12">Select Country</label>
-                                                <div class="col-sm-12">
-                                                    <select class="form-control form-control-line">
-                                                        <option>London</option>
-                                                        <option>India</option>
-                                                        <option>Usa</option>
-                                                        <option>Canada</option>
-                                                        <option>Thailand</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                           
+                                           
                                             <div class="form-group">
                                                 <div class="col-sm-12">
                                                     <button class="btn btn-success">Update Profile</button>
@@ -123,6 +123,36 @@
                                         </form>
                                     </div>
                                 </div>
+
+                                <div class="tab-pane" id="password" role="tabpanel">
+                                    <div class="card-body">
+                                        <form class="form-horizontal form-material">
+                                            
+                                            <div class="form-group">
+                                                <label class="col-md-12">Password</label>
+                                                <div class="col-md-12">
+                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                           
+
+                                            <div class="form-group">
+                                                <label class="col-md-12">Confirm Password</label>
+                                                <div class="col-md-12">
+                                                    <input type="password" value="password" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                           
+                                           
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <button class="btn btn-success">Update Password</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -391,6 +391,31 @@ class HomeController extends Controller
           }
     }
 
+    public function editprodile(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            
+            
+            User::where('id', $user->id)->update([
+                'name' => $request->name,
+                'm_name' => $request->m_name,
+                'l_name' => $request->l_name,
+                'phone' => $request->phone,
+                    ]);
+
+
+            Alert::success('Success', 'Your Profile has been successfully created');
+
+            return back();
+        }catch(Exception $e) {
+             $message =  $e->getMessage();
+             Alert::error('Error', $message);
+
+             return back();
+          }
+    }
+
 
 
 }
