@@ -55,16 +55,16 @@
 
                                     <div class="form-group">
                                         <div class="row">
-                                            <label class="col-md-6" for="cpwd">Salary</span>
+                                            <label class="col-md-12" for="cpwd">Salary</span>
                                             </label>
-                                            <label class="col-md-6" for="cpwd">No. Needed</span>
-                                            </label>
-                                            <div class="col-md-6">
+                                            <!-- <label class="col-md-6" for="cpwd">No. Needed</span>
+                                            </label> -->
+                                            <div class="col-md-12">
                                                 <input type="text" id="cpwd" name="cpwd" class="form-control text-muted" value="{{$job->salary}}" disabled>
                                             </div>
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                                 <input type="text" id="cpwd" name="cpwd" class="form-control text-muted" value="{{$job->needed}}" disabled>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
 
@@ -99,10 +99,8 @@
                                     <div >
                                         <div class="row">
                                            
-                                            <div class="col-md-12">
-                                            <textarea class="textarea_editor form-control" rows="15" id="recipient-name" name="description" disabled>
+                                            <div class="col-md-12" contenteditable="true">
                                                     {{$job->description}}
-                                                </textarea>
                                             </div>
                                         </div>
                                     </div>

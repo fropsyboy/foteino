@@ -28,7 +28,7 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Job Title</th>
-                                <th>No. Needed</th>
+                                <!-- <th>No. Needed</th> -->
                                 <th>Start Date</th>
                                 <th>End date</th>
                                 <th>Salary Range</th>
@@ -47,7 +47,7 @@
                                     {{$item->title}}
                                 </a>
                             </td>
-                            <td>{{$item->needed}}</td>
+                            <!-- <td>{{$item->needed}}</td> -->
                             <td>{{$item->start}}</td>
                             <td>{{$item->end}}</td>
                             <td>{{$item->salary}}</td>
@@ -109,15 +109,15 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-4">
+                        <!-- <div class="form-group col-md-4">
                             <label for="recipient-name" class="control-label">No. Needed:</label>
                             <input type="text" class="form-control " name="needed" id="recipient-name" placeholder="3 Personel" required>
-                        </div>
-                        <div class="form-group col-md-4">
+                        </div> -->
+                        <div class="form-group col-md-6">
                             <label for="message-text" class="control-label">Start Date:</label>
                             <input type="text" class="form-control text-muted mydatepicker" name="start" id="bdate" placeholder="YYYY/MM/DD" required>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="message-text" class="control-label">End Date:</label>
                             <input type="text" class="form-control mydatepicker" name="end" id="recipient-name" placeholder="YYYY/MM/DD" required>
                         </div>
