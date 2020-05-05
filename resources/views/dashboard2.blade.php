@@ -76,7 +76,7 @@
                             <tr>
                             <th>S/N</th>
                                 <th>Job Title</th>
-                                <th>No. Needed</th>
+                                <!-- <th>No. Needed</th> -->
                                 <th>Start Date</th>
                                 <th>End date</th>
                                 <th>Salary Range</th>
@@ -94,7 +94,7 @@
                                     {{$item->title}}
                                 </a>
                             </td>
-                            <td>{{$item->needed}}</td>
+                            <!-- <td>{{$item->needed}}</td> -->
                             <td>{{$item->start}}</td>
                             <td>{{$item->end}}</td>
                             <td>{{$item->salary}}</td>
