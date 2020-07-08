@@ -286,7 +286,7 @@ class AuthController extends Controller
     public function jobs()
     {
         $currentDate = date('Y-m-d');
-        $jobs = Job::with('cleanCompany')->whereDate('end', '>=', $currentDate)->orderby('id','desc')->get();
+        $jobs = Job::with('cleanCompany')->whereDate('end', '>=', $currentDate)->where('status','active')->orderby('id','desc')->get();
 
         $data = [
             'jobs' => $jobs,
@@ -405,7 +405,7 @@ class AuthController extends Controller
 
         $currentDate = date('Y-m-d');
 
-        $search = Job::with('cleanCompany')->where( $request->category, 'like', '%'.$request->get('query').'%' )->whereDate('end', '>=', $currentDate)->orderby('id','desc')->get();
+        $search = Job::with('cleanCompany')->where( $request->category, 'like', '%'.$request->get('query').'%' )->whereDate('end', '>=', $currentDate)->where('status','active')->orderby('id','desc')->get();
 
         dd($search);
         $data = [
