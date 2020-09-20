@@ -2,6 +2,40 @@
 
 All notable changes to `sweet-alert` will be documented in this file.
 
+## v3.1.7 - 2020-09-09
+- Added Support for Laravel 8
+- Upgraded SweetAlert2 to latest version
+- Minor Changes
+- Docs Updated
+
+## v3.1.6 - 2020-07-17
+- Added flexibility to Always load the sweetalert.all.js and Never load the sweetalert.all.js by [farhanianz](https://github.com/farhanianz)
+- Upgraded SweetAlert2 to latest version
+- Minor Changes in Middleware.md
+- Docs Updated
+
+## v3.1.5 - 2020-06-11
+- Upgraded SweetAlert2 to latest version
+- Minor Changes in Middleware
+- Docs Updated
+
+## v3.1.4 - 2020-03-31
+- Upgraded SweetAlert2 to latest version
+- Added ability to custom css classes
+- Docs Updated
+
+## v3.1.3 - 2020-02-22
+- Upgraded SweetAlert2 to latest version
+
+## v3.1.2 - 2020-01-24
+- Upgraded SweetAlert2 to latest version
+- Prepare Laravel 7
+
+## v3.1.1 - 2020-01-07
+- Upgraded SweetAlert2 to latest version
+- Added ability to activate or not the middleware error messages
+- Docs Updated
+
 ## v3.1.0 - 2019-12-29
 - Upgraded SweetAlert2 to latest version
 - Added Tidelift to funding.yaml

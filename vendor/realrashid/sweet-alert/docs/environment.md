@@ -15,6 +15,37 @@
 
 /*
 |--------------------------------------------------------------------------
+| Always load the sweetalert.all.js
+|--------------------------------------------------------------------------
+| There might be situations where you will always want the sweet alert
+| js package to be there for you. (for eg. you might use it heavily to
+| show notifications or you might want to use the native js) then this
+| might be handy.
+|
+*/
+
+'alwaysLoadJS' => env('SWEET_ALERT_ALWAYS_LOAD_JS', false),
+
+/*
+|--------------------------------------------------------------------------
+| Never load the sweetalert.all.js
+|--------------------------------------------------------------------------
+| If you want to handle the sweet alert js package by yourself
+| (for eg. you might want to use laravel mix) then this can be
+| handy.
+| If you set always load js to true & never load js to false,
+| it's going to prioritize the never load js.
+|
+| alwaysLoadJs = true  & neverLoadJs = true  => js will not be loaded
+| alwaysLoadJs = true  & neverLoadJs = false => js will be loaded
+| alwaysLoadJs = false & neverLoadJs = false => js will be loaded when
+| you set alert/toast by using the facade/helper functions.
+*/
+
+'neverLoadJS' => env('SWEET_ALERT_NEVER_LOAD_JS', false),
+
+/*
+|--------------------------------------------------------------------------
 | AutoClose Timer
 |--------------------------------------------------------------------------
 |
@@ -135,6 +166,32 @@
     'toast_close_button' => env('SWEET_ALERT_MIDDLEWARE_TOAST_CLOSE_BUTTON', true),
 
     'alert_auto_close' => env('SWEET_ALERT_MIDDLEWARE_ALERT_AUTO_CLOSE', 5000),
+    'auto_display_error_messages' => env('SWEET_ALERT_AUTO_DISPLAY_ERROR_MESSAGES', false),
+],
+
+/*
+|--------------------------------------------------------------------------
+| Custom Class
+|--------------------------------------------------------------------------
+| A custom CSS class for the modal:
+|
+*/
+
+'customClass' => [
+
+    'container' => env('SWEET_ALERT_CONTAINER_CLASS'),
+    'popup' => env('SWEET_ALERT_POPUP_CLASS'),
+    'header' => env('SWEET_ALERT_HEADER_CLASS'),
+    'title' => env('SWEET_ALERT_TITLE_CLASS'),
+    'closeButton' => env('SWEET_ALERT_CLOSE_BUTTON_CLASS'),
+    'icon' => env('SWEET_ALERT_ICON_CLASS'),
+    'image' => env('SWEET_ALERT_IMAGE_CLASS'),
+    'content' => env('SWEET_ALERT_CONTENT_CLASS'),
+    'input' => env('SWEET_ALERT_INPUT_CLASS'),
+    'actions' => env('SWEET_ALERT_ACTIONS_CLASS'),
+    'confirmButton' => env('SWEET_ALERT_CONFIRM_BUTTON_CLASS'),
+    'cancelButton' => env('SWEET_ALERT_CANCEL_BUTTON_CLASS'),
+    'footer' => env('SWEET_ALERT_FOOTER_CLASS'),
 ],
 
 ```

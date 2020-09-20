@@ -31,7 +31,6 @@ class Toaster
     public function __construct(SessionStore $session)
     {
         $this->setDefaultConfig();
-
         $this->session = $session;
     }
 
@@ -51,7 +50,22 @@ class Toaster
             'heightAuto' => config('sweetalert.height_auto'),
             'padding' => config('sweetalert.padding'),
             'showConfirmButton' => config('sweetalert.show_confirm_button'),
-            'showCloseButton' => config('sweetalert.show_close_button')
+            'showCloseButton' => config('sweetalert.show_close_button'),
+            'customClass' => [
+                'container' => config('sweetalert.customClass.container'),
+                'popup' => config('sweetalert.customClass.popup'),
+                'header' => config('sweetalert.customClass.header'),
+                'title' => config('sweetalert.customClass.title'),
+                'closeButton' => config('sweetalert.customClass.closeButton'),
+                'icon' => config('sweetalert.customClass.icon'),
+                'image' => config('sweetalert.customClass.image'),
+                'content' => config('sweetalert.customClass.content'),
+                'input' => config('sweetalert.customClass.input'),
+                'actions' => config('sweetalert.customClass.actions'),
+                'confirmButton' => config('sweetalert.customClass.confirmButton'),
+                'cancelButton' => config('sweetalert.customClass.cancelButton'),
+                'footer' => config('sweetalert.customClass.footer')
+            ]
         ];
     }
 
@@ -61,23 +75,23 @@ class Toaster
      * @return $config
      * @author Rashid Ali <realrashid05@gmail.com>
      */
-     public function middleware()
-     {
-        unset($this->config['position']);
-        unset($this->config['heightAuto']);
-        unset($this->config['width']);
-        unset($this->config['padding']);
-        unset($this->config['showCloseButton']);
-        unset($this->config['timer']);
+    public function middleware()
+    {
+        unset($this->config['position'], $this->config['heightAuto'], $this->config['width'], $this->config['padding'], $this->config['showCloseButton']);
 
+        if(!config('sweetalert.middleware.autoClose')){
+            $this->removeTimer();
+        }else{
+            unset($this->config['timer']);
+            $this->config['timer'] = config('sweetalert.middleware.timer');
+        }
         $this->config['position'] = config('sweetalert.middleware.toast_position');
         $this->config['showCloseButton'] = config('sweetalert.middleware.toast_close_button');
-        $this->config['timer'] = config('sweetalert.middleware.alert_auto_close');
 
         $this->flash();
 
         return $this;
-     }
+    }
 
     /**
      * Flash an alert message.
@@ -125,26 +139,26 @@ class Toaster
         return $this;
     }
 
-   /**
-    * Display a warning typed alert message with a text and a title.
-    *
-    * @param string $title
-    * @param string $text
-    * @author Rashid Ali <realrashid05@gmail.com>
-    */
+    /**
+     * Display a warning typed alert message with a text and a title.
+     *
+     * @param string $title
+     * @param string $text
+     * @author Rashid Ali <realrashid05@gmail.com>
+     */
     public function warning($title = '', $text = '')
     {
         $this->alert($title, $text, 'warning');
         return $this;
     }
 
-   /**
-    * Display a question typed alert message with a text and a title.
-    *
-    * @param string $title
-    * @param string $text
-    * @author Rashid Ali <realrashid05@gmail.com>
-    */
+    /**
+     * Display a question typed alert message with a text and a title.
+     *
+     * @param string $title
+     * @param string $text
+     * @author Rashid Ali <realrashid05@gmail.com>
+     */
     public function question($title = '', $text = '')
     {
         $this->alert($title, $text, 'question');
@@ -183,9 +197,9 @@ class Toaster
         $this->config['imageUrl'] = $imageUrl;
         $this->config['imageWidth'] = $imageWidth;
         $this->config['imageHeight'] = $imageHeight;
-        if(!is_null($imageAlt)){
+        if (!is_null($imageAlt)) {
             $this->config['imageAlt'] = $imageAlt;
-        }else{
+        } else {
             $this->config['imageAlt'] = $title;
         }
         $this->config['animation'] = false;
@@ -194,14 +208,14 @@ class Toaster
         return $this;
     }
 
-   /**
-    * Display a html typed alert message with html code.
-    *
-    * @param string $title
-    * @param string $code
-    * @param string $icon
-    * @author Rashid Ali <realrashid05@gmail.com>
-    */
+    /**
+     * Display a html typed alert message with html code.
+     *
+     * @param string $title
+     * @param string $code
+     * @param string $icon
+     * @author Rashid Ali <realrashid05@gmail.com>
+     */
     public function html($title = '', $code = '', $icon = '')
     {
         $this->config['title'] = $title;
@@ -245,14 +259,13 @@ class Toaster
     {
         $this->config['toast'] = true;
         $this->config['showCloseButton'] = true;
-        if(!empty($position)){
+        if (!empty($position)) {
             $this->config['position'] = $position;
-        }else{
+        } else {
             $this->config['position'] = config('sweetalert.toast_position');
         }
         $this->config['showConfirmButton'] = false;
-        unset($this->config['width']);
-        unset($this->config['padding']);
+        unset($this->config['width'], $this->config['padding']);
 
         $this->flash();
         return $this;
@@ -333,13 +346,13 @@ class Toaster
         return $this;
     }
 
-   /**
-    * Modal window padding.
-    * The default padding is 1.25rem.
-    *
-    * @param string $padding
-    * @author Rashid Ali <realrashid05@gmail.com>
-    */
+    /**
+     * Modal window padding.
+     * The default padding is 1.25rem.
+     *
+     * @param string $padding
+     * @author Rashid Ali <realrashid05@gmail.com>
+     */
     public function padding($padding = '1.25rem')
     {
         $this->config['padding'] = $padding;
@@ -408,7 +421,7 @@ class Toaster
      */
     public function animation($showAnimation, $hideAnimation)
     {
-        if(!config('sweetalert.animation.enable')){
+        if (!config('sweetalert.animation.enable')) {
             config(['sweetalert.animation.enable' => true]);
         }
         $this->config['showClass'] = ['popup' => "animated {$showAnimation}"];
@@ -577,7 +590,6 @@ class Toaster
         $this->flash();
         return $this;
     }
-
 
     /**
      * Remove the timer from config option.
