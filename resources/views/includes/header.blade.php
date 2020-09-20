@@ -8,7 +8,7 @@
                 </b>
                 <span>
                     <img src="{{asset('assets/images/lo.png')}}" alt="homepage" class="dark-logo" />
-                    <img src="{{asset('assets/images/logo-light.jpg')}}" class="light-logo" alt="homepage" />
+                    <img src="{{asset('assets/images/lo.png')}}" class="light-logo" alt="homepage" />
                 </span>
             </a>
         </div>

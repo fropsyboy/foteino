@@ -2,6 +2,7 @@
 
 ### Using the Middleware
 
+
 First thing first
 Let register the middleware in web middleware groups by simply adding the middleware class
 
@@ -41,7 +42,6 @@ public function store(Request $request)
 ```
 
 Error Alert
-
 ```php
 public function store(Request $request)
 {
@@ -51,7 +51,7 @@ public function store(Request $request)
 	]);
 
 	if ($validator->fails()) {
-		return back()->with('errors', $validator->messages()->all()[0])->withInput();
+		return back()->with('error', $validator->messages()->all()[0])->withInput();
 	}
 	$task = Task::create($request->all());
 	return redirect('tasks')->with('success', 'Task Created Successfully!');
@@ -59,9 +59,7 @@ public function store(Request $request)
 	return redirect('tasks')->withSuccess('Task Created Successfully!');
 }
 ```
-
 Success Alert
-
 ```php
 public function store(Request $request)
 {
@@ -79,12 +77,11 @@ return redirect('route')->with('type', 'message');
 return redirect('route')->withType('message');
 ```
 
-All available types : `error` `success` `info` `warning` `question` .
+All available types `error` `success` `info` `warning` `question` .
 
 #### Toast
 
 Error Toast
-
 ```php
 public function store(Request $request)
 {
@@ -102,9 +99,7 @@ public function store(Request $request)
 	return redirect('tasks')->withSuccess('Task Created Successfully!');
 }
 ```
-
 Success Toast
-
 ```php
 public function store(Request $request)
 {
@@ -134,12 +129,11 @@ All available types `toast_error` `toast_success` `toast_info` `toast_warning` `
 !> You can not use helper methods with Middleware but you can set default values in `config/sweetalert.php` file! **Recommend** to use the .env keys.
 
 ```
-SWEET_ALERT_MIDDLEWARE_AUTO_CLOSE=false
 SWEET_ALERT_MIDDLEWARE_TOAST_POSITION='top-end'
 SWEET_ALERT_MIDDLEWARE_TOAST_CLOSE_BUTTON=true
-SWEET_ALERT_MIDDLEWARE_ALERT_CLOSE_TIME=5000
-SWEET_ALERT_AUTO_DISPLAY_ERROR_MESSAGES=true
+SWEET_ALERT_MIDDLEWARE_ALERT_AUTO_CLOSE=5000
 ```
 
 > Positions **'top'**, **'top-start'**, **'top-end'**,
-> **'center'**, **'center-start'**, **'center-end'**, **'bottom'**, **'bottom-start'**, or **'bottom-end'**.
+**'center'**, **'center-start'**, **'center-end'**, **'bottom'**, **'bottom-start'**, or **'bottom-end'**.
+

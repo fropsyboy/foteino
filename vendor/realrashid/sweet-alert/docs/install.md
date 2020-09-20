@@ -13,7 +13,6 @@ After installing the sweet-alert package, register the service provider
 ```php
 RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 ```
-
 in your `config/app.php` configuration file:
 
 ```php

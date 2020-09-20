@@ -2179,11 +2179,7 @@ class X509
                 }
 
                 while (!feof($fsock)) {
-                    $temp = fread($fsock, 1024);
-                    if ($temp === false) {
-                        return false;
-                    }
-                    $data.= $temp;
+                    $data.= fread($fsock, 1024);
                 }
 
                 break;
@@ -5054,9 +5050,7 @@ class X509
          * subject=/O=organization/OU=org unit/CN=common name
          * issuer=/O=organization/CN=common name
          */
-        $temp = strlen($str) <= ini_get('pcre.backtrack_limit') ?
-            preg_replace('#.*?^-+[^-]+-+[\r\n ]*$#ms', '', $str, 1) :
-            $str;
+        $temp = preg_replace('#.*?^-+[^-]+-+[\r\n ]*$#ms', '', $str, 1);
         // remove the -----BEGIN CERTIFICATE----- and -----END CERTIFICATE----- stuff
         $temp = preg_replace('#-+[^-]+-+#', '', $temp);
         // remove new lines
